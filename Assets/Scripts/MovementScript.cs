@@ -22,10 +22,18 @@ public class MovementScript : MonoBehaviour {
     Vector3 moveVelocity;
 
     LayerMask buildingLayerMask;
+    LayerMask floorLayerMask;
+
+    GridScript grid;
 
     void Start() {
+        grid = FindObjectOfType<GridScript>();
+
+        transform.position = grid.GetTop((int)transform.position.x, (int)transform.position.z) + new Vector3(0, .6f, 0);
         targetPosition = transform.position;
+
         buildingLayerMask = LayerMask.GetMask("Buildings");
+        floorLayerMask = LayerMask.GetMask("Floors");
     }
 
     void Update() {
@@ -87,9 +95,12 @@ public class MovementScript : MonoBehaviour {
 
     void Move() {
         Vector3 target = transform.position + transform.rotation * Vector3.forward;
-        Collider[] buildings = Physics.OverlapSphere(target, .5f, buildingLayerMask);
-        if (buildings.Length == 0) {
-            targetPosition = target;
+        Vector3 targetTop = grid.GetTop((int)target.x, (int)target.z);
+        Collider[] floors = Physics.OverlapSphere(targetTop, .25f, floorLayerMask);
+        Collider[] buildings = Physics.OverlapSphere(targetTop, .25f, buildingLayerMask);
+
+        if (floors.Length == 1 && buildings.Length == 0) {
+            targetPosition = targetTop + new Vector3(0, .6f, 0);
         }
     }
 
