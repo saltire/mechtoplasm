@@ -12,6 +12,8 @@ public class PlayerScript : MonoBehaviour {
     
     public float deadzone = 0.5f;
 
+    public string playerNumber = "";
+
     int x;
     int z;
 
@@ -60,24 +62,23 @@ public class PlayerScript : MonoBehaviour {
     }
 
     void GetInput() {
-        //Util.Log(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-        if (Input.GetAxisRaw("Vertical") >= deadzone && Input.GetAxisRaw("Horizontal") >= deadzone) {
+        if (Input.GetAxisRaw(playerNumber + "Vertical") >= deadzone && Input.GetAxisRaw(playerNumber + "Horizontal") >= deadzone) {
             transform.rotation = Quaternion.Euler(0, 90, 0);
             Move();
         }
-        else if (Input.GetAxisRaw("Vertical") <= -deadzone && Input.GetAxisRaw("Horizontal") >= deadzone) {
+        else if (Input.GetAxisRaw(playerNumber + "Vertical") <= -deadzone && Input.GetAxisRaw(playerNumber + "Horizontal") >= deadzone) {
             transform.rotation = Quaternion.Euler(0, 180, 0);
             Move();
         }
-        else if (Input.GetAxisRaw("Vertical") <= -deadzone && Input.GetAxisRaw("Horizontal") <= -deadzone) {
+        else if (Input.GetAxisRaw(playerNumber + "Vertical") <= -deadzone && Input.GetAxisRaw(playerNumber + "Horizontal") <= -deadzone) {
             transform.rotation = Quaternion.Euler(0, 270, 0);
             Move();
         }
-        else if (Input.GetAxisRaw("Vertical") >= deadzone && Input.GetAxisRaw("Horizontal") <= deadzone) {
+        else if (Input.GetAxisRaw(playerNumber + "Vertical") >= deadzone && Input.GetAxisRaw(playerNumber + "Horizontal") <= deadzone) {
             transform.rotation = Quaternion.Euler(0, 0, 0);
             Move();
         }
-        else if (Input.GetButtonDown("Fire1") && fireCooldownRemaining <= 0) {
+        else if (Input.GetButtonDown(playerNumber + "Fire1") && fireCooldownRemaining <= 0) {
             Fire();
         }
     }
