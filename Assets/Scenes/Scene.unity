@@ -9196,6 +9196,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12a99fcffec799f47991df0335f7c262, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moveSpeed: 0.07
 --- !u!1 &2074586882
 GameObject:
   m_ObjectHideFlags: 0
@@ -9311,7 +9312,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2079757196}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ab69702fa71a1504a97dc124980af0bc, type: 3}
   m_Name: 
@@ -9320,6 +9321,7 @@ MonoBehaviour:
     type: 3}
   gridWidth: 10
   gridHeight: 10
+  heightScale: 1
 --- !u!4 &2079757198
 Transform:
   m_ObjectHideFlags: 0
