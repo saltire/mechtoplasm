@@ -602,6 +602,7 @@ MonoBehaviour:
   fireCooldown: 0.5
   deadzone: 0.5
   playerNumber: P2
+  otherPlayer: {fileID: 476635361}
 --- !u!4 &96818341
 Transform:
   m_ObjectHideFlags: 0
@@ -2632,6 +2633,7 @@ MonoBehaviour:
   fireCooldown: 0.5
   deadzone: 0.5
   playerNumber: P1
+  otherPlayer: {fileID: 96818340}
 --- !u!4 &476635362
 Transform:
   m_ObjectHideFlags: 0
