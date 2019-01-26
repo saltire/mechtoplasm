@@ -6,7 +6,7 @@ using UnityEngine;
 public class PlayerScript : MonoBehaviour {
     public float moveSpeed = .07f;
 
-    public GameObject fireballWeaponPrefab;
+    public GameObject weaponPrefab;
     public float fireCooldown = .5f;
     float fireCooldownRemaining = 0;
 
@@ -92,6 +92,6 @@ public class PlayerScript : MonoBehaviour {
     }
 
     void Fire() {
-        Instantiate(fireballWeaponPrefab, transform.position, transform.rotation);
+        Instantiate(weaponPrefab, transform.position, transform.rotation);
     }
 }
