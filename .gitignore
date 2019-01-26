@@ -30,6 +30,7 @@ sysinfo.txt
 *.unitypackage
 
 .vscode
+.vs
 
 psd/
 working/
