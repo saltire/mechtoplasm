@@ -43,7 +43,7 @@ public class GridScript : MonoBehaviour {
     }
 
     public bool SquareExists(float x, float z) {
-        return SquareExists((int)Mathf.Floor(x), (int)Mathf.Floor(z));
+        return SquareExists(Mathf.FloorToInt(x), Mathf.FloorToInt(z));
     }
 
     public bool SquareExists(int x, int z) {
@@ -51,7 +51,7 @@ public class GridScript : MonoBehaviour {
     }
 
     public Square GetSquare(float x, float z) {
-        return GetSquare((int)Mathf.Floor(x), (int)Mathf.Floor(z));
+        return GetSquare(Mathf.FloorToInt(x), Mathf.FloorToInt(z));
     }
 
     public Square GetSquare(int x, int z) {

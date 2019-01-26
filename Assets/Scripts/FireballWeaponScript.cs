@@ -26,7 +26,7 @@ public class FireballWeaponScript : WeaponScript {
 
         fireballs = new List<Fireball>();
         for (int i = 0; i < fireballCount; i++) {
-            Vector3 target = transform.position + transform.rotation * Vector3.forward * (i + 1);
+            Vector3 target = transform.position + transform.forward * (i + 1);
             if (grid.SquareExists(target.x, target.z)) {
                 fireballs.Add(new Fireball() {
                     obj = Instantiate(fireballPrefab, transform.position, Quaternion.identity),

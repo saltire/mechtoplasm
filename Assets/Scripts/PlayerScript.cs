@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -38,7 +38,7 @@ public class PlayerScript : MonoBehaviour {
     }
 
     public Vector3Int GetCoords(Vector3 pos) {
-        return new Vector3Int((int)Mathf.Floor(pos.x), 0, (int)Mathf.Floor(pos.z));
+        return new Vector3Int(Mathf.FloorToInt(pos.x), 0, Mathf.FloorToInt(pos.z));
     }
 
     void Update() {
@@ -86,7 +86,7 @@ public class PlayerScript : MonoBehaviour {
     }
 
     void Move() {
-        Move(transform.position + transform.rotation * Vector3.forward);
+        Move(transform.position + transform.forward);
     }
 
     public void Move(Vector3 target) {
