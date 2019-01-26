@@ -96,6 +96,7 @@ public class PlayerScript : MonoBehaviour {
     }
 
     void Fire() {
+        fireCooldownRemaining = fireCooldown;
         Instantiate(weaponPrefab, transform.position, transform.rotation);
     }
 }
