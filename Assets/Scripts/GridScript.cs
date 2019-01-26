@@ -8,6 +8,8 @@ public class GridScript : MonoBehaviour {
     public int gridHeight = 10;
     public float heightScale = 2;
 
+    public GameObject[] cubePrefabs;
+
     GameObject[] cubes;
 
     void Awake() {
@@ -20,7 +22,7 @@ public class GridScript : MonoBehaviour {
             for (int z = 0; z < gridHeight; z++) {
                 int i = x * gridWidth + z;
                 float y = Mathf.PerlinNoise((float)x / gridWidth, (float)z / gridHeight) * heightScale;
-                cubes[i] = Instantiate(cubePrefab, new Vector3(x + .5f, y - 1, z + .5f), Quaternion.identity);
+                cubes[i] = Instantiate(cubePrefabs[Random.Range(0, cubePrefabs.Length - 1)], new Vector3(x + .5f, y - 1, z + .5f), Quaternion.Euler(-90, Random.Range(0, 4) * 90, 0));
                 cubes[i].transform.parent = transform;
             }
         }
