@@ -51,7 +51,7 @@ public class PlayerScript : MonoBehaviour {
 
             moveVelocity = Vector3.zero;
         }
-        else {
+        else if (fireCooldownRemaining <= 0) {
             GetInput();
         }
 
@@ -77,7 +77,7 @@ public class PlayerScript : MonoBehaviour {
             transform.rotation = Quaternion.Euler(0, 0, 0);
             Move();
         }
-        else if (Input.GetButtonDown(playerNumber + "Fire1") && fireCooldownRemaining <= 0) {
+        else if (Input.GetButtonDown(playerNumber + "Fire1")) {
             Fire();
         }
     }
