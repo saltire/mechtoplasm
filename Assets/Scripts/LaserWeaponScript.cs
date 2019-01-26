@@ -15,7 +15,7 @@ public class LaserWeaponScript : MonoBehaviour {
 
         Vector3 beam = transform.rotation * Vector3.forward;
         int length = 0;
-        while (grid.SquareExists((int)transform.position.x + (int)beam.x * (length + 1), (int)transform.position.z + (int)beam.z * (length + 1))) {
+        while (grid.SquareExists(transform.position.x + Mathf.Floor(beam.x) * (length + 1), transform.position.z + Mathf.Floor(beam.z) * (length + 1))) {
             length += 1;
         }
 

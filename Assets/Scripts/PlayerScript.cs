@@ -38,7 +38,7 @@ public class PlayerScript : MonoBehaviour {
     }
 
     Vector3Int GetCoords(Vector3 pos) {
-        return new Vector3Int((int)pos.x, 0, (int)pos.z);
+        return new Vector3Int((int)Mathf.Floor(pos.x), 0, (int)Mathf.Floor(pos.z));
     }
 
     void Update() {
@@ -83,7 +83,10 @@ public class PlayerScript : MonoBehaviour {
     }
 
     void Move() {
-        Vector3 target = transform.position + transform.rotation * Vector3.forward;
+        Move(transform.position + transform.rotation * Vector3.forward);
+    }
+
+    public void Move(Vector3 target) {
         Vector3Int targetCoords = GetCoords(target);
         Vector3Int otherPlayerCoords = otherPlayer.GetCoords();
 

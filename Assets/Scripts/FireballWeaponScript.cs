@@ -27,14 +27,19 @@ public class FireballWeaponScript : MonoBehaviour {
         fireballs = new List<Fireball>();
         for (int i = 0; i < fireballCount; i++) {
             Vector3 target = transform.position + transform.rotation * Vector3.forward * (i + 1);
-            if (grid.SquareExists((int)target.x, (int)target.z)) {
+            if (grid.SquareExists(target.x, target.z)) {
                 fireballs.Add(new Fireball() {
                     obj = Instantiate(fireballPrefab, transform.position, Quaternion.identity),
                     origin = transform.position + new Vector3(0, fireOriginHeight, 0),
-                    target = grid.GetSquare((int)target.x, (int)target.z).top,
+                    target = grid.GetSquare(target.x, target.z).top,
                 });
             }
         }
+
+        if (fireballs.Count == 0) {
+            Destroy(gameObject);
+        }
+
         fireTimeRemaining = fireTime;
 
         buildingLayerMask = LayerMask.GetMask("Buildings");
