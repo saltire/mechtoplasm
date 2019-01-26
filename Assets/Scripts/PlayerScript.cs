@@ -37,7 +37,7 @@ public class PlayerScript : MonoBehaviour {
         return GetCoords(transform.position);
     }
 
-    Vector3Int GetCoords(Vector3 pos) {
+    public Vector3Int GetCoords(Vector3 pos) {
         return new Vector3Int((int)Mathf.Floor(pos.x), 0, (int)Mathf.Floor(pos.z));
     }
 
@@ -102,6 +102,7 @@ public class PlayerScript : MonoBehaviour {
 
     void Fire() {
         fireCooldownRemaining = fireCooldown;
-        Instantiate(weaponPrefab, transform.position, transform.rotation);
+        GameObject weapon = Instantiate(weaponPrefab, transform.position, transform.rotation);
+        weapon.GetComponent<WeaponScript>().player = gameObject.GetComponent<PlayerScript>();
     }
 }

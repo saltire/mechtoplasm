@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LaserWeaponScript : MonoBehaviour {
+public class LaserWeaponScript : WeaponScript {
     public float fireTime = .5f;
     public float fireOriginHeight = .6f;
 

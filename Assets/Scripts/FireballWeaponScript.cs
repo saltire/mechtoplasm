@@ -9,7 +9,7 @@ struct Fireball {
     public Vector3 target;
 }
 
-public class FireballWeaponScript : MonoBehaviour {
+public class FireballWeaponScript : WeaponScript {
     public GameObject fireballPrefab;
     public int fireballCount = 3;
     public float fireTime = .5f;
