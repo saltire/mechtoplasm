@@ -21,8 +21,11 @@ public class MovementScript : MonoBehaviour {
     Vector3 targetPosition;
     Vector3 moveVelocity;
 
+    LayerMask buildingLayerMask;
+
     void Start() {
         targetPosition = transform.position;
+        buildingLayerMask = LayerMask.GetMask("Buildings");
     }
 
     void Update() {
@@ -42,10 +45,14 @@ public class MovementScript : MonoBehaviour {
             fireTimeRemaining -= Time.deltaTime;
             float normalizedFireTime = 1 - (fireTimeRemaining / fireTime);
 
-
             if (fireTimeRemaining <= 0) {
                 foreach (Fireball fireball in fireballs) {
                     Destroy(fireball.obj);
+
+                    Collider[] buildings = Physics.OverlapSphere(fireball.target, .5f, buildingLayerMask);
+                    if (buildings.Length > 0) {
+                        Destroy(buildings[0].gameObject);
+                    }
                 }
             }
             else {
@@ -79,7 +86,11 @@ public class MovementScript : MonoBehaviour {
     }
 
     void Move() {
-        targetPosition = transform.position + transform.rotation * Vector3.forward;
+        Vector3 target = transform.position + transform.rotation * Vector3.forward;
+        Collider[] buildings = Physics.OverlapSphere(target, .5f, buildingLayerMask);
+        if (buildings.Length == 0) {
+            targetPosition = target;
+        }
     }
 
     void Fire() {
