@@ -2,6 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+public struct Square {
+    public GameObject cube;
+    public Vector3 top;
+}
+
 public class GridScript : MonoBehaviour {
     public GameObject cubePrefab;
     public int gridWidth = 10;
@@ -12,27 +18,33 @@ public class GridScript : MonoBehaviour {
 
     GameObject[] cubes;
 
+    Square[] squares;
+
     void Awake() {
         foreach (Transform t in transform) {
             Destroy(t.gameObject);
         }
 
         cubes = new GameObject[gridWidth * gridHeight];
+        squares = new Square[gridWidth * gridHeight];
         for (int x = 0; x < gridWidth; x++) {
             for (int z = 0; z < gridHeight; z++) {
                 int i = x * gridWidth + z;
                 float y = Mathf.PerlinNoise((float)x / gridWidth, (float)z / gridHeight) * heightScale;
-                cubes[i] = Instantiate(cubePrefabs[Random.Range(0, cubePrefabs.Length - 1)], new Vector3(x + .5f, y - 1, z + .5f), Quaternion.Euler(-90, Random.Range(0, 4) * 90, 0));
-                cubes[i].transform.parent = transform;
+                squares[i].cube = Instantiate(cubePrefabs[Random.Range(0, cubePrefabs.Length - 1)], new Vector3(x + .5f, y - 1, z + .5f), Quaternion.Euler(-90, Random.Range(0, 4) * 90, 0));
+                squares[i].cube.transform.parent = transform;
+
+                squares[i].top = squares[i].cube.transform.position + new Vector3(0, squares[i].cube.transform.localScale.y / 2, 0);
             }
         }
     }
-    
-    public Vector3 GetTop(int x, int z) {
-        if (x < 0 || x >= gridWidth || z < 0 || z >= gridWidth) {
-            return Vector3.zero;
-        }
+
+    public bool SquareExists(int x, int z) {
+        return !(x < 0 || x >= gridWidth || z < 0 || z >= gridWidth);
+    }
+
+    public Square GetSquare(int x, int z) {
         int i = x * gridWidth + z;
-        return cubes[i].transform.position + new Vector3(0, .5f, 0);
+        return squares[i];
     }
 }

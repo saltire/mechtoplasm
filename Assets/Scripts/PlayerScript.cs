@@ -5,6 +5,7 @@ using UnityEngine;
 
 struct Fireball {
     public GameObject obj;
+    public Vector3 origin;
     public Vector3 target;
 }
 
@@ -14,7 +15,8 @@ public class PlayerScript : MonoBehaviour {
     public GameObject fireballPrefab;
     public int fireballCount = 3;
     public float fireTime = .5f;
-    public float fireHeight = 1;
+    public float fireOriginHeight = .6f;
+    public float fireArcHeight = 1;
     Fireball[] fireballs;
     float fireTimeRemaining = 0;
 
@@ -33,7 +35,7 @@ public class PlayerScript : MonoBehaviour {
         grid = FindObjectOfType<GridScript>();
 
         ResetXZ();
-        transform.position = grid.GetTop(x, z);
+        transform.position = grid.GetSquare(x, z).top;
         targetPosition = transform.position;
 
         buildingLayerMask = LayerMask.GetMask("Buildings");
@@ -77,7 +79,8 @@ public class PlayerScript : MonoBehaviour {
             }
             else {
                 foreach (Fireball fireball in fireballs) {
-                    fireball.obj.transform.position = Vector3.Lerp(transform.position, fireball.target, normalizedFireTime) + new Vector3(0, fireHeight * Mathf.Sin(normalizedFireTime * Mathf.PI), 0);
+                    fireball.obj.transform.position = Vector3.Lerp(fireball.origin, fireball.target, normalizedFireTime) + 
+                        new Vector3(0, fireArcHeight * Mathf.Sin(normalizedFireTime * Mathf.PI), 0);
                 }
             }
         }
@@ -107,12 +110,13 @@ public class PlayerScript : MonoBehaviour {
 
     void Move() {
         Vector3 target = transform.position + transform.rotation * Vector3.forward;
-        Vector3 targetTop = grid.GetTop((int)target.x, (int)target.z);
-        Collider[] floors = Physics.OverlapSphere(targetTop, .25f, floorLayerMask);
-        Collider[] buildings = Physics.OverlapSphere(targetTop, .25f, buildingLayerMask);
+        if (grid.SquareExists((int)target.x, (int)target.z)) {
+            Square square = grid.GetSquare((int)target.x, (int)target.z);
+            Collider[] buildings = Physics.OverlapSphere(square.top, .25f, buildingLayerMask);
 
-        if (floors.Length == 1 && buildings.Length == 0) {
-            targetPosition = targetTop;
+            if (buildings.Length == 0) {
+                targetPosition = square.top;
+            }
         }
     }
 
@@ -121,6 +125,7 @@ public class PlayerScript : MonoBehaviour {
         for (int i = 0; i < fireballCount; i++) {
             fireballs[i] = new Fireball() {
                 obj = Instantiate(fireballPrefab, transform.position, Quaternion.identity),
+                origin = transform.position + new Vector3(0, fireOriginHeight, 0),
                 target = transform.position + transform.rotation * Vector3.forward * (i + 1),
             };
         }
