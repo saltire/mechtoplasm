@@ -9104,7 +9104,7 @@ GameObject:
   - component: {fileID: 2068580725}
   - component: {fileID: 2068580729}
   m_Layer: 0
-  m_Name: Capsule
+  m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9197,6 +9197,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 0.07
+  fireballPrefab: {fileID: 5221765327652735831, guid: df0439d8651665e408231f0780f02df0,
+    type: 3}
+  fireballCount: 3
+  fireTime: 0.5
+  fireHeight: 1
 --- !u!1 &2074586882
 GameObject:
   m_ObjectHideFlags: 0
