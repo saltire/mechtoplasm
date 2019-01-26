@@ -12,6 +12,8 @@ struct Fireball {
 public class PlayerScript : MonoBehaviour {
     public float moveSpeed = .07f;
 
+    public float deadzone = 0.5f;
+
     public GameObject fireballPrefab;
     public int fireballCount = 3;
     public float fireTime = .5f;
@@ -87,20 +89,21 @@ public class PlayerScript : MonoBehaviour {
     }
 
     void GetInput() {
-        if (Input.GetAxisRaw("Vertical") == 1) {
-            transform.rotation = Quaternion.Euler(0, 0, 0);
-            Move();
-        }
-        else if (Input.GetAxisRaw("Vertical") == -1) {
-            transform.rotation = Quaternion.Euler(0, 180, 0);
-            Move();
-        }
-        else if (Input.GetAxisRaw("Horizontal") == 1) {
+        //Util.Log(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        if (Input.GetAxisRaw("Vertical") >= deadzone && Input.GetAxisRaw("Horizontal") >= deadzone) {
             transform.rotation = Quaternion.Euler(0, 90, 0);
             Move();
         }
-        else if (Input.GetAxisRaw("Horizontal") == -1) {
+        else if (Input.GetAxisRaw("Vertical") <= -deadzone && Input.GetAxisRaw("Horizontal") >= deadzone) {
+            transform.rotation = Quaternion.Euler(0, 180, 0);
+            Move();
+        }
+        else if (Input.GetAxisRaw("Vertical") <= -deadzone && Input.GetAxisRaw("Horizontal") <= -deadzone) {
             transform.rotation = Quaternion.Euler(0, 270, 0);
+            Move();
+        }
+        else if (Input.GetAxisRaw("Vertical") >= deadzone && Input.GetAxisRaw("Horizontal") <= deadzone) {
+            transform.rotation = Quaternion.Euler(0, 0, 0);
             Move();
         }
         else if (Input.GetButtonDown("Fire1") && fireTimeRemaining <= 0) {
