@@ -10,12 +10,13 @@ public class GridScript : MonoBehaviour {
     void Start() {
         for (int x = 0; x < gridWidth; x++) {
             for (int z = 0; z < gridHeight; z++) {
-                Instantiate(cubePrefab, new Vector3(x, 0, z), Quaternion.identity);
+                float y = Mathf.PerlinNoise((float)x / gridWidth, (float)z / gridHeight);
+                GameObject cube = Instantiate(cubePrefab, new Vector3(x + .5f, y - 1, z + .5f), Quaternion.identity);
+                cube.transform.parent = transform;
             }
         }
     }
 
     void Update() {
-        
     }
 }
