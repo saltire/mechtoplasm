@@ -61,19 +61,22 @@ public class PlayerScript : MonoBehaviour {
     }
 
     void GetInput() {
-        if (Input.GetAxisRaw(playerNumber + "Vertical") >= deadzone && Input.GetAxisRaw(playerNumber + "Horizontal") >= deadzone) {
+        float verticalInput = Input.GetAxisRaw(playerNumber + "Vertical");
+        float horizontalInput = Input.GetAxisRaw(playerNumber + "Horizontal");
+
+        if (verticalInput >= deadzone && horizontalInput >= deadzone) {
             transform.rotation = Quaternion.Euler(0, 90, 0);
             Move();
         }
-        else if (Input.GetAxisRaw(playerNumber + "Vertical") <= -deadzone && Input.GetAxisRaw(playerNumber + "Horizontal") >= deadzone) {
+        else if (verticalInput <= -deadzone && horizontalInput >= deadzone) {
             transform.rotation = Quaternion.Euler(0, 180, 0);
             Move();
         }
-        else if (Input.GetAxisRaw(playerNumber + "Vertical") <= -deadzone && Input.GetAxisRaw(playerNumber + "Horizontal") <= -deadzone) {
+        else if (verticalInput <= -deadzone && horizontalInput <= -deadzone) {
             transform.rotation = Quaternion.Euler(0, 270, 0);
             Move();
         }
-        else if (Input.GetAxisRaw(playerNumber + "Vertical") >= deadzone && Input.GetAxisRaw(playerNumber + "Horizontal") <= -deadzone) {
+        else if (verticalInput >= deadzone && horizontalInput <= -deadzone) {
             transform.rotation = Quaternion.Euler(0, 0, 0);
             Move();
         }
