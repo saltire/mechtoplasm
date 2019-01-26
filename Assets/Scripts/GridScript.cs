@@ -9,12 +9,14 @@ public struct Square {
 }
 
 public class GridScript : MonoBehaviour {
-    public GameObject cubePrefab;
     public int gridWidth = 10;
     public int gridHeight = 10;
     public float heightScale = 2;
 
+    public float buildingChance = .03f;
+
     public GameObject[] cubePrefabs;
+    public GameObject[] buildingPrefabs;
 
     GameObject[] cubes;
 
@@ -35,6 +37,10 @@ public class GridScript : MonoBehaviour {
                 squares[i].cube.transform.parent = transform;
 
                 squares[i].top = squares[i].cube.transform.position + new Vector3(0, squares[i].cube.transform.localScale.y / 2, 0);
+
+                if (Mathf.Abs(x - z) < Mathf.Min(gridWidth, gridHeight) - 3 && Random.value < buildingChance) {
+                    Instantiate(buildingPrefabs[Random.Range(0, buildingPrefabs.Length - 1)], new Vector3(x + .5f, y, z + .5f), Quaternion.Euler(-90, Random.Range(0, 4) * 90, 0));
+                }
             }
         }
     }
