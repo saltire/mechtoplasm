@@ -3,22 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-struct Fireball {
-    public GameObject obj;
-    public Vector3 origin;
-    public Vector3 target;
-}
-
 public class PlayerScript : MonoBehaviour {
     public float moveSpeed = .07f;
 
-    public GameObject fireballPrefab;
-    public int fireballCount = 3;
-    public float fireTime = .5f;
-    public float fireOriginHeight = .6f;
-    public float fireArcHeight = 1;
-    Fireball[] fireballs;
-    float fireTimeRemaining = 0;
+    public GameObject fireballWeaponPrefab;
+    public float fireCooldown = .5f;
+    float fireCooldownRemaining = 0;
 
     int x;
     int z;
@@ -62,26 +52,8 @@ public class PlayerScript : MonoBehaviour {
             GetInput();
         }
 
-        if (fireTimeRemaining > 0) {
-            fireTimeRemaining -= Time.deltaTime;
-            float normalizedFireTime = 1 - (fireTimeRemaining / fireTime);
-
-            if (fireTimeRemaining <= 0) {
-                foreach (Fireball fireball in fireballs) {
-                    Destroy(fireball.obj);
-
-                    Collider[] buildings = Physics.OverlapSphere(fireball.target, .25f, buildingLayerMask);
-                    if (buildings.Length > 0) {
-                        Destroy(buildings[0].gameObject);
-                    }
-                }
-            }
-            else {
-                foreach (Fireball fireball in fireballs) {
-                    fireball.obj.transform.position = Vector3.Lerp(fireball.origin, fireball.target, normalizedFireTime) + 
-                        new Vector3(0, fireArcHeight * Mathf.Sin(normalizedFireTime * Mathf.PI), 0);
-                }
-            }
+        if (fireCooldownRemaining > 0) {
+            fireCooldownRemaining -= Time.deltaTime;
         }
     }
 
@@ -102,7 +74,7 @@ public class PlayerScript : MonoBehaviour {
             transform.rotation = Quaternion.Euler(0, 270, 0);
             Move();
         }
-        else if (Input.GetButtonDown("Fire1") && fireTimeRemaining <= 0) {
+        else if (Input.GetButtonDown("Fire1") && fireCooldownRemaining <= 0) {
             Fire();
         }
     }
@@ -120,14 +92,6 @@ public class PlayerScript : MonoBehaviour {
     }
 
     void Fire() {
-        fireballs = new Fireball[fireballCount];
-        for (int i = 0; i < fireballCount; i++) {
-            fireballs[i] = new Fireball() {
-                obj = Instantiate(fireballPrefab, transform.position, Quaternion.identity),
-                origin = transform.position + new Vector3(0, fireOriginHeight, 0),
-                target = transform.position + transform.rotation * Vector3.forward * (i + 1),
-            };
-        }
-        fireTimeRemaining = fireTime;
+        Instantiate(fireballWeaponPrefab, transform.position, transform.rotation);
     }
 }

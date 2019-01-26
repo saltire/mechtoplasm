@@ -2577,12 +2577,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 0.07
-  fireballPrefab: {fileID: 5221765327652735831, guid: df0439d8651665e408231f0780f02df0,
+  fireballWeaponPrefab: {fileID: 1087918642747642770, guid: 73344484b99671f48bab5b129fb54a24,
     type: 3}
-  fireballCount: 3
-  fireTime: 0.5
-  fireOriginHeight: 0.6
-  fireArcHeight: 1
+  fireCooldown: 0.5
 --- !u!4 &476635362
 Transform:
   m_ObjectHideFlags: 0
