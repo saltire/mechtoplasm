@@ -13,9 +13,7 @@ public class PlayerScript : MonoBehaviour {
     public float deadzone = 0.5f;
 
     public string playerNumber = "";
-
-    int x;
-    int z;
+    public PlayerScript otherPlayer;
 
     Vector3 targetPosition;
     Vector3 moveVelocity;
@@ -28,27 +26,28 @@ public class PlayerScript : MonoBehaviour {
     void Start() {
         grid = FindObjectOfType<GridScript>();
 
-        ResetXZ();
-        transform.position = grid.GetSquare(x, z).top;
+        Vector3Int coords = GetCoords();
+        transform.position = grid.GetSquare(coords.x, coords.z).top;
         targetPosition = transform.position;
 
         buildingLayerMask = LayerMask.GetMask("Buildings");
     }
 
-    void ResetXZ() {
-        x = (int)transform.position.x;
-        z = (int)transform.position.z;
+    public Vector3Int GetCoords() {
+        return GetCoords(transform.position);
+    }
+
+    Vector3Int GetCoords(Vector3 pos) {
+        return new Vector3Int((int)pos.x, 0, (int)pos.z);
     }
 
     void Update() {
         float targetDistance = Vector3.Distance(targetPosition, transform.position);
         if (targetDistance > .01f) {
             transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref moveVelocity, moveSpeed);
-            ResetXZ();
         }
         else if (targetDistance > 0) {
             transform.position = targetPosition;
-            ResetXZ();
 
             moveVelocity = Vector3.zero;
         }
@@ -74,7 +73,7 @@ public class PlayerScript : MonoBehaviour {
             transform.rotation = Quaternion.Euler(0, 270, 0);
             Move();
         }
-        else if (Input.GetAxisRaw(playerNumber + "Vertical") >= deadzone && Input.GetAxisRaw(playerNumber + "Horizontal") <= deadzone) {
+        else if (Input.GetAxisRaw(playerNumber + "Vertical") >= deadzone && Input.GetAxisRaw(playerNumber + "Horizontal") <= -deadzone) {
             transform.rotation = Quaternion.Euler(0, 0, 0);
             Move();
         }
@@ -85,8 +84,11 @@ public class PlayerScript : MonoBehaviour {
 
     void Move() {
         Vector3 target = transform.position + transform.rotation * Vector3.forward;
-        if (grid.SquareExists((int)target.x, (int)target.z)) {
-            Square square = grid.GetSquare((int)target.x, (int)target.z);
+        Vector3Int targetCoords = GetCoords(target);
+        Vector3Int otherPlayerCoords = otherPlayer.GetCoords();
+
+        if (grid.SquareExists(targetCoords.x, targetCoords.z) && otherPlayerCoords != targetCoords) {
+            Square square = grid.GetSquare(targetCoords.x, targetCoords.z);
             Collider[] buildings = Physics.OverlapSphere(square.top, .25f, buildingLayerMask);
 
             if (buildings.Length == 0) {
