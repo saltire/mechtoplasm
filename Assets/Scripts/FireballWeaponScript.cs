@@ -16,19 +16,24 @@ public class FireballWeaponScript : MonoBehaviour {
     public float fireOriginHeight = .6f;
     public float fireArcHeight = 1;
 
-    Fireball[] fireballs;
+    List<Fireball> fireballs;
     float fireTimeRemaining = 0;
 
     LayerMask buildingLayerMask;
 
     void Start() {
-        fireballs = new Fireball[fireballCount];
+        GridScript grid = FindObjectOfType<GridScript>();
+
+        fireballs = new List<Fireball>();
         for (int i = 0; i < fireballCount; i++) {
-            fireballs[i] = new Fireball() {
-                obj = Instantiate(fireballPrefab, transform.position, Quaternion.identity),
-                origin = transform.position + new Vector3(0, fireOriginHeight, 0),
-                target = transform.position + transform.rotation * Vector3.forward * (i + 1),
-            };
+            Vector3 target = transform.position + transform.rotation * Vector3.forward * (i + 1);
+            if (grid.SquareExists((int)target.x, (int)target.z)) {
+                fireballs.Add(new Fireball() {
+                    obj = Instantiate(fireballPrefab, transform.position, Quaternion.identity),
+                    origin = transform.position + new Vector3(0, fireOriginHeight, 0),
+                    target = grid.GetSquare((int)target.x, (int)target.z).top,
+                });
+            }
         }
         fireTimeRemaining = fireTime;
 
