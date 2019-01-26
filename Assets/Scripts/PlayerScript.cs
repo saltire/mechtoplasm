@@ -37,6 +37,10 @@ public class PlayerScript : MonoBehaviour {
         return GetCoords(transform.position);
     }
 
+    public Vector3Int GetTargetCoords() {
+        return GetCoords(targetPosition);
+    }
+
     public Vector3Int GetCoords(Vector3 pos) {
         return new Vector3Int(Mathf.FloorToInt(pos.x), 0, Mathf.FloorToInt(pos.z));
     }
@@ -92,8 +96,9 @@ public class PlayerScript : MonoBehaviour {
     public void Move(Vector3 target) {
         Vector3Int targetCoords = GetCoords(target);
         Vector3Int otherPlayerCoords = otherPlayer.GetCoords();
+        Vector3Int otherPlayerTarget = otherPlayer.GetTargetCoords();
 
-        if (grid.SquareExists(targetCoords.x, targetCoords.z) && otherPlayerCoords != targetCoords) {
+        if (grid.SquareExists(targetCoords.x, targetCoords.z) && otherPlayerCoords != targetCoords && otherPlayerTarget != targetCoords) {
             Square square = grid.GetSquare(targetCoords.x, targetCoords.z);
             Collider[] buildings = Physics.OverlapSphere(square.top, .25f, buildingLayerMask);
 
