@@ -18,8 +18,6 @@ public class GridScript : MonoBehaviour {
     public GameObject[] cubePrefabs;
     public GameObject[] buildingPrefabs;
 
-    GameObject[] cubes;
-
     Square[] squares;
 
     void Awake() {
@@ -27,7 +25,6 @@ public class GridScript : MonoBehaviour {
             Destroy(t.gameObject);
         }
 
-        cubes = new GameObject[gridWidth * gridHeight];
         squares = new Square[gridWidth * gridHeight];
         for (int x = 0; x < gridWidth; x++) {
             for (int z = 0; z < gridHeight; z++) {

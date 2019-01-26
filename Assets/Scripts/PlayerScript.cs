@@ -39,7 +39,6 @@ public class PlayerScript : MonoBehaviour {
         targetPosition = transform.position;
 
         buildingLayerMask = LayerMask.GetMask("Buildings");
-        floorLayerMask = LayerMask.GetMask("Floors");
     }
 
     void ResetXZ() {
