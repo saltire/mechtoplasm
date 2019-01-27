@@ -15,6 +15,7 @@ public class FireballWeaponScript : WeaponScript {
     public float fireTime = .5f;
     public float fireOriginHeight = .6f;
     public float fireArcHeight = 1;
+    public int damage = 1;
 
     public FireSurfaceScript fireSurfacePrefab;
 
@@ -68,6 +69,13 @@ public class FireballWeaponScript : WeaponScript {
                 Collider[] buildings = Physics.OverlapSphere(fireball.target, .25f, buildingLayerMask);
                 if (buildings.Length > 0) {
                     Destroy(buildings[0].gameObject);
+                }
+
+                Vector3Int targetCoords = player.GetCoords(fireball.target);
+                Vector3Int otherPlayerCoords = player.otherPlayer.GetCoords();
+
+                if (otherPlayerCoords == targetCoords) {
+                    player.otherPlayer.Damage(damage);
                 }
             }
 

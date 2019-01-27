@@ -8,6 +8,8 @@ public class LaserWeaponScript : WeaponScript {
 
     float fireTimeRemaining = 0;
 
+    public int damage = 1;
+
     void Start() {
         fireTimeRemaining = fireTime;
 
@@ -21,11 +23,16 @@ public class LaserWeaponScript : WeaponScript {
         transform.position += new Vector3(0, fireOriginHeight, 0);
         transform.localScale = new Vector3(1, 1, (length + .5f));
 
-        LayerMask buildingLayerMask = LayerMask.GetMask("Buildings");
+        LayerMask buildingLayerMask = LayerMask.GetMask("Buildings", "Players");
 
         RaycastHit[] hits = Physics.RaycastAll(transform.position, transform.forward, length + .5f, buildingLayerMask);
         foreach (RaycastHit hit in hits) {
-            Destroy(hit.collider.gameObject);
+            if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Buildings")) {
+                Destroy(hit.collider.gameObject);
+            }
+            else if (hit.collider.gameObject == player.otherPlayer.gameObject) {
+                player.otherPlayer.Damage(damage);
+            }
         }
     }
 

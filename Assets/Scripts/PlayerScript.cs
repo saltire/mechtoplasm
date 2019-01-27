@@ -220,13 +220,25 @@ public class PlayerScript : MonoBehaviour {
         }
     }
 
+    public void Damage(int damage) {
+        if (respawnTimer <= 0) {
+            playerHealthCurrent -= damage;
+            if (playerHealthCurrent < 0) { playerHealthCurrent = 0; }
+        }
+    }
+
     void PlayerDeath() {
+        DropOrbs();
         ResetWeapons();
-        // drop orbs at player position
         transform.position = startingPosition;
         targetPosition = transform.position;
         respawnTimer = respawnTimerMax;
         playerHealthCurrent = playerHealthMax;
+    }
+
+    void DropOrbs() {
+        // check which weapons to drop
+        // instantiate orbs
     }
 
     void ResetWeapons() {

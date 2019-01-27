@@ -388,7 +388,7 @@ GameObject:
   - component: {fileID: 8375679810756309238}
   - component: {fileID: 7935758541283501397}
   - component: {fileID: 3616588994635491429}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -446,6 +446,7 @@ MonoBehaviour:
   sineOmega: 10
   playerNumber: P1
   otherPlayer: {fileID: 0}
+  ui: {fileID: 0}
 --- !u!82 &8375679810756309238
 AudioSource:
   m_ObjectHideFlags: 0
@@ -553,7 +554,7 @@ CapsuleCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.25
-  m_Height: 1
+  m_Height: 1.5
   m_Direction: 1
   m_Center: {x: 0, y: 0.6, z: 0}
 --- !u!54 &3616588994635491429

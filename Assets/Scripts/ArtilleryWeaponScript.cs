@@ -17,6 +17,7 @@ public class ArtilleryWeaponScript : WeaponScript {
     Vector3 origin;
     Vector3 target;
     float fireTimeRemaining = 0;
+    public int damage = 1;
 
     GridScript grid;
     MeshRenderer projectileMesh;
@@ -60,6 +61,13 @@ public class ArtilleryWeaponScript : WeaponScript {
             Collider[] buildings = Physics.OverlapSphere(target, .25f, buildingLayerMask);
             if (buildings.Length > 0) {
                 Destroy(buildings[0].gameObject);
+            }
+
+            Vector3Int targetCoords = player.GetCoords(target);
+            Vector3Int otherPlayerCoords = player.otherPlayer.GetCoords();
+
+            if (otherPlayerCoords == targetCoords) {
+                player.otherPlayer.Damage(damage);
             }
 
             Destroy(gameObject);
