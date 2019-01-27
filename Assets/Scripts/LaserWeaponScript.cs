@@ -6,12 +6,19 @@ public class LaserWeaponScript : WeaponScript {
     public float fireTime = .5f;
     public float fireOriginHeight = .6f;
 
+    public float initialDiameter = .2f;
+
     float fireTimeRemaining = 0;
 
     public int damage = 1;
 
+    Transform cylinder;
+    Transform particles;
+
     void Start() {
         fireTimeRemaining = fireTime;
+
+        player.Move(transform.position - transform.forward);
 
         GridScript grid = FindObjectOfType<GridScript>();
 
@@ -34,10 +41,18 @@ public class LaserWeaponScript : WeaponScript {
                 player.otherPlayer.Damage(damage);
             }
         }
+        
+        cylinder = transform.Find("Cylinder");
+        particles = transform.Find("Particles");
     }
 
     void Update() {
         fireTimeRemaining -= Time.deltaTime;
+
+        float diameter = initialDiameter * fireTimeRemaining / fireTime;
+        cylinder.localScale = new Vector3(diameter, cylinder.localScale.y, diameter);
+
+        particles.position -= transform.forward * (Time.deltaTime / fireTime);
 
         if (fireTimeRemaining <= 0) {
             Destroy(gameObject);
