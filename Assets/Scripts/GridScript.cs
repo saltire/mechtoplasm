@@ -26,6 +26,8 @@ public class GridScript : MonoBehaviour {
     public Color lowColor = Color.black;
     public float minHeight = .5f;
 
+    public Color[] colors;
+
     public GameObject floorPrefab;
     public Sprite[] floorSprites;
     public Sprite[] buildingSprites;
@@ -35,13 +37,6 @@ public class GridScript : MonoBehaviour {
     public OrbScript orbPrefab;
 
     Square[] squares;
-
-    Color[] colors = new Color[] {
-        Color.green,
-        Color.red,
-        Color.blue,
-        Color.yellow,
-    };
 
     void Awake() {
         foreach (Transform t in transform) {
