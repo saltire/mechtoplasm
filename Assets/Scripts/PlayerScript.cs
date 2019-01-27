@@ -30,6 +30,8 @@ public class PlayerScript : MonoBehaviour {
     public string playerNumber = "";
     public PlayerScript otherPlayer;
 
+    public UIScript ui;
+
     Vector3 startingPosition;
     Vector3 targetPosition;
     Vector3 moveVelocity;
@@ -52,7 +54,7 @@ public class PlayerScript : MonoBehaviour {
         buildingLayerMask = LayerMask.GetMask("Buildings");
 
         animator = GetComponentInChildren<Animator>();
-        animator.SetInteger("facingDirection", (int)(transform.rotation.eulerAngles.y / 90));
+        SetAnimatorRotation();
     }
 
     public Vector3Int GetCoords() {
@@ -124,25 +126,25 @@ public class PlayerScript : MonoBehaviour {
         if (verticalInput >= deadzone && horizontalInput >= deadzone) {
             transform.rotation = Quaternion.Euler(0, 90, 0);
             animator.transform.parent.rotation = Quaternion.identity;
-            animator.SetInteger("facingDirection", 1);
+            SetAnimatorRotation();
             Move();
         } 
         else if (verticalInput <= -deadzone && horizontalInput >= deadzone) {
             transform.rotation = Quaternion.Euler(0, 180, 0);
             animator.transform.parent.rotation = Quaternion.identity;
-            animator.SetInteger("facingDirection", 2);
+            SetAnimatorRotation();
             Move();
         } 
         else if (verticalInput <= -deadzone && horizontalInput <= -deadzone) {
             transform.rotation = Quaternion.Euler(0, 270, 0);
             animator.transform.parent.rotation = Quaternion.identity;
-            animator.SetInteger("facingDirection", 3);
+            SetAnimatorRotation();
             Move();
         } 
         else if (verticalInput >= deadzone && horizontalInput <= -deadzone) {
             transform.rotation = Quaternion.Euler(0, 0, 0);
             animator.transform.parent.rotation = Quaternion.identity;
-            animator.SetInteger("facingDirection", 0);
+            SetAnimatorRotation();
             Move();
         } 
         else if (Input.GetButtonDown(playerNumber + "Fire0")) {
@@ -163,21 +165,29 @@ public class PlayerScript : MonoBehaviour {
         Move(transform.position + transform.forward);
     }
 
+    void SetAnimatorRotation() {
+        animator.SetInteger("facingDirection", (int)(transform.rotation.eulerAngles.y / 90));
+    }
+
     // collision check with orbs
     private void OnTriggerEnter(Collider other) {
         OrbScript orb = other.GetComponent<OrbScript>();
         if (orb != null) {
             if (orb.weaponIndex == 0) {
                 canUseWeapon0 = true;
+                ui.UpdateOrb(0, true);
             }
             else if (orb.weaponIndex == 1) {
                 canUseWeapon1 = true;
+                ui.UpdateOrb(1, true);
             }
             else if (orb.weaponIndex == 2) {
                 canUseWeapon2 = true;
+                ui.UpdateOrb(2, true);
             }
             else if (orb.weaponIndex == 3) {
                 canUseWeapon3 = true;
+                ui.UpdateOrb(3, true);
             }
             Destroy(other.gameObject);
         }
@@ -224,5 +234,10 @@ public class PlayerScript : MonoBehaviour {
         canUseWeapon1 = false;
         canUseWeapon2 = false;
         canUseWeapon3 = false;
+
+        ui.UpdateOrb(0, false);
+        ui.UpdateOrb(1, false);
+        ui.UpdateOrb(2, false);
+        ui.UpdateOrb(3, false);
     }
 }
