@@ -9660,11 +9660,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player 1
       objectReference: {fileID: 0}
-    - target: {fileID: 8439553400841904549, guid: f9c1270877eae924d9b8f01035117bbc,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 8439553400841904548, guid: f9c1270877eae924d9b8f01035117bbc,
         type: 3}
       propertyPath: otherPlayer

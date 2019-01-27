@@ -8,10 +8,10 @@ public class PlayerScript : MonoBehaviour {
 
     public GameObject weaponPrefab;
     public GameObject[] weaponArray;
-    public bool canUseWeapon0 = true;
-    public bool canUseWeapon1 = true;
-    public bool canUseWeapon2 = true;
-    public bool canUseWeapon3 = true;
+    public bool canUseWeapon0 = false;
+    public bool canUseWeapon1 = false;
+    public bool canUseWeapon2 = false;
+    public bool canUseWeapon3 = false;
     public float fireCooldown = .5f;
     float fireCooldownRemaining = 0;
     
@@ -128,6 +128,25 @@ public class PlayerScript : MonoBehaviour {
 
     void Move() {
         Move(transform.position + transform.forward);
+    }
+
+    private void OnTriggerEnter(Collider other) {
+        OrbScript orb = other.GetComponent<OrbScript>();
+        if (orb != null) {
+            if (orb.weaponIndex == 0) {
+                canUseWeapon0 = true;
+            }
+            else if (orb.weaponIndex == 1) {
+                canUseWeapon1 = true;
+            }
+            else if (orb.weaponIndex == 2) {
+                canUseWeapon2 = true;
+            }
+            else if (orb.weaponIndex == 3) {
+                canUseWeapon3 = true;
+            }
+            Destroy(other.gameObject);
+        }
     }
 
     public void Move(Vector3 target) {
