@@ -7,6 +7,11 @@ public class PlayerScript : MonoBehaviour {
     public float moveSpeed = .07f;
 
     public GameObject weaponPrefab;
+    public GameObject[] weaponArray;
+    public bool canUseWeapon0 = true;
+    public bool canUseWeapon1 = true;
+    public bool canUseWeapon2 = true;
+    public bool canUseWeapon3 = true;
     public float fireCooldown = .5f;
     float fireCooldownRemaining = 0;
     
@@ -14,10 +19,6 @@ public class PlayerScript : MonoBehaviour {
 
     public string playerNumber = "";
     public PlayerScript otherPlayer;
-
-    public AudioClip moveSound;
-
-    AudioSource audioSrc;
 
     Vector3 targetPosition;
     Vector3 moveVelocity;
@@ -28,7 +29,6 @@ public class PlayerScript : MonoBehaviour {
     GridScript grid;
 
     void Start() {
-        audioSrc = GetComponent<AudioSource>();
         grid = FindObjectOfType<GridScript>();
 
         Vector3Int coords = GetCoords();
@@ -95,8 +95,34 @@ public class PlayerScript : MonoBehaviour {
             transform.rotation = Quaternion.Euler(0, 0, 0);
             Move();
         }
+        else if (Input.GetButtonDown(playerNumber + "Fire0")) {
+            if (canUseWeapon0) {
+                Fire(0);
+            }
+            else {
+                Fire(-1);
+            }
+        }
         else if (Input.GetButtonDown(playerNumber + "Fire1")) {
-            Fire();
+            if (canUseWeapon1) {
+                Fire(1);
+            } else {
+                Fire(-1);
+            }
+        }
+        else if (Input.GetButtonDown(playerNumber + "Fire2")) {
+            if (canUseWeapon2) {
+                Fire(2);
+            } else {
+                Fire(-1);
+            }
+        }
+        else if (Input.GetButtonDown(playerNumber + "Fire3")) {
+            if (canUseWeapon3) {
+                Fire(3);
+            } else {
+                Fire(-1);
+            }
         }
     }
 
@@ -115,15 +141,19 @@ public class PlayerScript : MonoBehaviour {
 
             if (buildings.Length == 0) {
                 targetPosition = square.top;
-                
-                audioSrc.PlayOneShot(moveSound);
             }
         }
     }
 
-    void Fire() {
+    void Fire(int weaponNumber) {
         fireCooldownRemaining = fireCooldown;
-        GameObject weapon = Instantiate(weaponPrefab, transform.position, transform.rotation);
-        weapon.GetComponent<WeaponScript>().player = gameObject.GetComponent<PlayerScript>();
+        if (weaponNumber != -1) {
+            GameObject weapon = Instantiate(weaponArray[weaponNumber], transform.position, transform.rotation);
+            weapon.GetComponent<WeaponScript>().player = gameObject.GetComponent<PlayerScript>();
+        }
+        else {
+            GameObject weapon = Instantiate(weaponPrefab, transform.position, transform.rotation);
+            weapon.GetComponent<WeaponScript>().player = gameObject.GetComponent<PlayerScript>();
+        }
     }
 }
