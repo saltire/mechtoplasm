@@ -186,3 +186,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rubblePrefab: {fileID: 9189908852023334159, guid: 3c9a14cba082f724b99efaa339b5b840,
     type: 3}
+  rubbleSprites:
+  - {fileID: 21300000, guid: 7f7b8b28eaedcf443a894afd43257ec0, type: 3}
+  - {fileID: 21300000, guid: 8b5248ea2da36a44c9d1add988107f3e, type: 3}
+  - {fileID: 21300000, guid: 37a4b971f0560ce4198abe4954f26505, type: 3}
