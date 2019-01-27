@@ -20,6 +20,10 @@ public class GridScript : MonoBehaviour {
 
     public float buildingChance = .03f;
 
+    public Color highColor = Color.white;
+    public Color lowColor = Color.black;
+    public float minHeight = .5f;
+
     public GameObject cubePrefab;
     public Sprite[] floorSprites;
     public GameObject[] buildingPrefabs;
@@ -27,6 +31,13 @@ public class GridScript : MonoBehaviour {
     public OrbScript orbPrefab;
 
     Square[] squares;
+
+    Color[] colors = new Color[] {
+        Color.green,
+        Color.red,
+        Color.blue,
+        Color.yellow,
+    };
 
     void Awake() {
         foreach (Transform t in transform) {
@@ -40,22 +51,22 @@ public class GridScript : MonoBehaviour {
         temples[3] = new Vector3(Mathf.Floor(Random.Range(5, 9)), 0, Mathf.Floor(Random.Range(5, 9)));
 
         int orbRandomizer = Random.Range(0, templesCount);
+        float noiseOffset = Random.Range(0f, 100f);
 
         squares = new Square[gridWidth * gridHeight];
         for (int x = 0; x < gridWidth; x++) {
             for (int z = 0; z < gridHeight; z++) {
                 int i = x * gridWidth + z;
-                float y = Mathf.PerlinNoise((float)x / gridWidth, (float)z / gridHeight) * heightScale;
+                float y = Mathf.PerlinNoise((float)x / gridWidth + noiseOffset, (float)z / gridHeight + noiseOffset) * heightScale;
 
                 squares[i].cube = Instantiate(cubePrefab, new Vector3(x + .5f, y - 1, z + .5f), Quaternion.identity);
                 squares[i].cube.transform.parent = transform;
-                squares[i].color = Color.Lerp(Color.black, Color.white, y + .35f);
+                squares[i].color = Color.Lerp(lowColor, highColor, y * (1 - minHeight) + minHeight);
+                squares[i].top = squares[i].cube.transform.position + new Vector3(0, squares[i].cube.transform.localScale.y / 2, 0);
 
                 SpriteRenderer cubeSprite = squares[i].cube.GetComponentInChildren<SpriteRenderer>();
                 cubeSprite.sprite = floorSprites[Random.Range(0, floorSprites.Length - 1)];
                 cubeSprite.color = squares[i].color;
-
-                squares[i].top = squares[i].cube.transform.position + new Vector3(0, squares[i].cube.transform.localScale.y / 2, 0);
 
                 // place temples
                 bool templePlaced = false;
@@ -63,8 +74,11 @@ public class GridScript : MonoBehaviour {
                     if (x == temples[j].x && z == temples[j].z) {
                         OrbScript orb = Instantiate<OrbScript>(orbPrefab, new Vector3(x + .5f, y, z + .5f), Quaternion.Euler(0, 0, 0));
                         orb.weaponIndex = (j + orbRandomizer) % templesCount;
-                        Instantiate(templePrefabs[0], new Vector3(x + .5f, y, z + .5f), Quaternion.Euler(0, 0, 0));
+                        orb.GetComponent<MeshRenderer>().material.SetColor("_Color", colors[orb.weaponIndex]);
+
+                        GameObject temple = Instantiate(templePrefabs[0], new Vector3(x + .5f, y, z + .5f), Quaternion.Euler(0, 0, 0));
                         templePlaced = true;
+                        temple.GetComponent<MeshRenderer>().material.SetColor("_Color", colors[orb.weaponIndex]);
                     }
                 }
 
