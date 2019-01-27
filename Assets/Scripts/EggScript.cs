@@ -42,7 +42,7 @@ public class EggScript : MonoBehaviour {
 
     void OnDestroy() {
         if (!isQuitting) {
-            Instantiate(eggBurstPrefab, transform.position, Quaternion.identity);
+            Destroy(Instantiate(eggBurstPrefab, transform.position, Quaternion.identity), 5f);
         }
     }
 }

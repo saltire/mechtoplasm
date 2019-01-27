@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class PlayerScript : MonoBehaviour {
     public float moveSpeed = .07f;
@@ -97,12 +96,6 @@ public class PlayerScript : MonoBehaviour {
             PlayerDeath();
         }
 
-        if (Input.GetKeyDown("r")) {
-            SceneManager.LoadScene("Scene");
-            foreach (EggScript eggScript in FindObjectsOfType<EggScript>()) {
-                eggScript.DestroyQuietly();
-            }
-        }
         // handle respawn timer and flicker
         if (respawnTimer > 0) {
             respawnTimer -= Time.deltaTime;

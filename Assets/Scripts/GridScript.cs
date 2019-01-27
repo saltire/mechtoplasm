@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 
 public struct Square {
@@ -99,6 +100,24 @@ public class GridScript : MonoBehaviour {
                         Instantiate(eggPrefab, new Vector3(x + .5f, y, z + .5f), Quaternion.identity);
                     }
                 }
+            }
+        }
+    }
+
+    void Update() {
+        if (Input.GetKeyDown("r")) {
+            SceneManager.LoadScene("Scene");
+
+            foreach (EggScript eggScript in FindObjectsOfType<EggScript>()) {
+                eggScript.DestroyQuietly();
+            }
+        }
+
+        if (Input.GetKeyDown("l")) {
+            GameObject building = GameObject.Find("Building(Clone)");
+            if (building != null) {
+                Instantiate(eggPrefab, building.transform.position, Quaternion.identity);
+                Destroy(building);
             }
         }
     }
