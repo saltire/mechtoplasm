@@ -13,7 +13,8 @@ public class BuildingScript : MonoBehaviour {
 
     void OnDestroy() {
         if (!isQuitting) {
-            Instantiate(rubblePrefab, transform.position, Quaternion.identity);
+            GameObject rubble = Instantiate(rubblePrefab, transform.position, Quaternion.identity);
+            rubble.GetComponentInChildren<SpriteRenderer>().color = GetComponentInChildren<SpriteRenderer>().color;
         }
     }
 }

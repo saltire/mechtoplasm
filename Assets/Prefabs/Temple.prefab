@@ -198,6 +198,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9510d4ab1570aa49af97cdb792642be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rubblePrefab: {fileID: 6668788056952905156, guid: eec2f8b3b0771704889560c923cdf1d5,
+    type: 3}
   orb: {fileID: 0}
 --- !u!1 &4614722830400173306
 GameObject:
@@ -289,7 +291,7 @@ GameObject:
   - component: {fileID: 6123567998237267222}
   - component: {fileID: 2030580370964822930}
   m_Layer: 0
-  m_Name: powerTower_Base
+  m_Name: Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

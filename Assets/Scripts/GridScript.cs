@@ -25,6 +25,7 @@ public class GridScript : MonoBehaviour {
     public Color highColor = Color.white;
     public Color lowColor = Color.black;
     public float minHeight = .5f;
+    public Color buildingColor = Color.white;
 
     public Color[] colors;
 
@@ -82,18 +83,19 @@ public class GridScript : MonoBehaviour {
 
                         TempleScript temple = Instantiate<TempleScript>(templePrefab, new Vector3(x + .5f, y, z + .5f), Quaternion.Euler(0, 0, 0));
                         templePlaced = true;
-                        // temple.GetComponent<MeshRenderer>().material.SetColor("_Color", colors[orb.weaponIndex]);
+                        temple.transform.Find("Base").GetComponent<SpriteRenderer>().color = buildingColor;
                         temple.transform.Find("Mask").GetComponent<SpriteRenderer>().color = colors[orb.weaponIndex];
                         temple.orb = orb;
                     }
                 }
 
-                // place bulidings
+                // place buildings
                 if (!templePlaced && Mathf.Abs(x - z) < Mathf.Min(gridWidth, gridHeight) - 3) {
                     if (Random.value < buildingChance) {
                         GameObject building = Instantiate(buildingPrefab, new Vector3(x + .5f, y, z + .5f), Quaternion.identity);
                         SpriteRenderer buildingSprite = building.GetComponentInChildren<SpriteRenderer>();
                         buildingSprite.sprite = buildingSprites[Random.Range(0, buildingSprites.Length - 1)];
+                        buildingSprite.color = buildingColor;
                     }
                     else if (Random.value < eggChance) {
                         Instantiate(eggPrefab, new Vector3(x + .5f, y, z + .5f), Quaternion.identity);
