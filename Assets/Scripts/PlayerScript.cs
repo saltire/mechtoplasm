@@ -42,11 +42,13 @@ public class PlayerScript : MonoBehaviour {
     LayerMask floorLayerMask;
 
     GridScript grid;
+    ExitScript exit;
 
     Animator animator;
 
     void Start() {
         grid = FindObjectOfType<GridScript>();
+        exit = FindObjectOfType<ExitScript>();
 
         Vector3Int coords = GetCoords();
         transform.position = grid.GetSquare(coords.x, coords.z).top;
@@ -182,18 +184,22 @@ public class PlayerScript : MonoBehaviour {
         if (orb != null) {
             if (orb.weaponIndex == 0) {
                 canUseWeapon0 = true;
+                exit.UpdateOrb(0, true);
                 ui.UpdateOrb(0, true);
             }
             else if (orb.weaponIndex == 1) {
                 canUseWeapon1 = true;
+                exit.UpdateOrb(1, true);
                 ui.UpdateOrb(1, true);
             }
             else if (orb.weaponIndex == 2) {
                 canUseWeapon2 = true;
+                exit.UpdateOrb(2, true);
                 ui.UpdateOrb(2, true);
             }
             else if (orb.weaponIndex == 3) {
                 canUseWeapon3 = true;
+                exit.UpdateOrb(3, true);
                 ui.UpdateOrb(3, true);
             }
             Destroy(other.gameObject);

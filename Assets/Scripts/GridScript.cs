@@ -37,11 +37,15 @@ public class GridScript : MonoBehaviour {
     public OrbScript orbPrefab;
 
     Square[] squares;
+    
+    LayerMask buildingLayerMask;
 
     void Awake() {
         foreach (Transform t in transform) {
             Destroy(t.gameObject);
         }
+
+        buildingLayerMask = LayerMask.GetMask("Buildings");
 
         // random temple start positions
         temples[0] = new Vector3(Mathf.Floor(Random.Range(1, 4)), 0, Mathf.Floor(Random.Range(1, 4)));
@@ -147,5 +151,10 @@ public class GridScript : MonoBehaviour {
 
         squares[i].surface = Instantiate<SurfaceScript>(surfacePrefab, squares[i].top, Quaternion.identity);
         squares[i].surface.square = squares[i];
+    }
+
+    public bool HasBuilding(Square square) {
+        Collider[] buildings = Physics.OverlapSphere(square.top, .25f, buildingLayerMask);
+        return buildings.Length > 0;
     }
 }

@@ -60,7 +60,7 @@ public class ArtilleryWeaponScript : WeaponScript {
 
             Vector3Int targetCoords = player.GetCoords(target);
             
-            // todo: 3x3 grid
+            // 3x3 area
             for (int x = targetCoords.x - 1; x <= targetCoords.x + 1; x++) {
                 for (int z = targetCoords.z - 1; z <= targetCoords.z + 1; z++) {
                     if (grid.SquareExists(x, z)) {
