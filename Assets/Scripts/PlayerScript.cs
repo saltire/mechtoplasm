@@ -32,6 +32,8 @@ public class PlayerScript : MonoBehaviour {
 
     GridScript grid;
 
+    Animator animator;
+
     void Start() {
         grid = FindObjectOfType<GridScript>();
 
@@ -41,6 +43,10 @@ public class PlayerScript : MonoBehaviour {
         targetPosition = transform.position;
 
         buildingLayerMask = LayerMask.GetMask("Buildings");
+
+        animator = GetComponentInChildren<Animator>();
+        Util.Log(transform.rotation.eulerAngles.y, (int)(transform.rotation.eulerAngles.y / 90));
+        animator.SetInteger("facingDirection", (int)(transform.rotation.eulerAngles.y / 90));
     }
 
     public Vector3Int GetCoords() {
@@ -95,40 +101,39 @@ public class PlayerScript : MonoBehaviour {
 
         if (verticalInput >= deadzone && horizontalInput >= deadzone) {
             transform.rotation = Quaternion.Euler(0, 90, 0);
+            animator.transform.parent.rotation = Quaternion.identity;
+            animator.SetInteger("facingDirection", 1);
             Move();
-        } else if (verticalInput <= -deadzone && horizontalInput >= deadzone) {
+        } 
+        else if (verticalInput <= -deadzone && horizontalInput >= deadzone) {
             transform.rotation = Quaternion.Euler(0, 180, 0);
+            animator.transform.parent.rotation = Quaternion.identity;
+            animator.SetInteger("facingDirection", 2);
             Move();
-        } else if (verticalInput <= -deadzone && horizontalInput <= -deadzone) {
+        } 
+        else if (verticalInput <= -deadzone && horizontalInput <= -deadzone) {
             transform.rotation = Quaternion.Euler(0, 270, 0);
+            animator.transform.parent.rotation = Quaternion.identity;
+            animator.SetInteger("facingDirection", 3);
             Move();
-        } else if (verticalInput >= deadzone && horizontalInput <= -deadzone) {
+        } 
+        else if (verticalInput >= deadzone && horizontalInput <= -deadzone) {
             transform.rotation = Quaternion.Euler(0, 0, 0);
+            animator.transform.parent.rotation = Quaternion.identity;
+            animator.SetInteger("facingDirection", 0);
             Move();
-        } else if (Input.GetButtonDown(playerNumber + "Fire0")) {
-            if (canUseWeapon0) {
-                Fire(0);
-            } else {
-                Fire(-1);
-            }
-        } else if (Input.GetButtonDown(playerNumber + "Fire1")) {
-            if (canUseWeapon1) {
-                Fire(1);
-            } else {
-                Fire(-1);
-            }
-        } else if (Input.GetButtonDown(playerNumber + "Fire2")) {
-            if (canUseWeapon2) {
-                Fire(2);
-            } else {
-                Fire(-1);
-            }
-        } else if (Input.GetButtonDown(playerNumber + "Fire3")) {
-            if (canUseWeapon3) {
-                Fire(3);
-            } else {
-                Fire(-1);
-            }
+        } 
+        else if (Input.GetButtonDown(playerNumber + "Fire0")) {
+            Fire(canUseWeapon0 ? 0 : -1);
+        } 
+        else if (Input.GetButtonDown(playerNumber + "Fire1")) {
+            Fire(canUseWeapon1 ? 1 : -1);
+        } 
+        else if (Input.GetButtonDown(playerNumber + "Fire2")) {
+            Fire(canUseWeapon2 ? 2 : -1);
+        } 
+        else if (Input.GetButtonDown(playerNumber + "Fire3")) {
+            Fire(canUseWeapon3 ? 3 : -1);
         }
     }
 
