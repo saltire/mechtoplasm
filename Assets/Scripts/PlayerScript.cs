@@ -81,6 +81,9 @@ public class PlayerScript : MonoBehaviour {
 
         if (Input.GetKeyDown("r")) {
             SceneManager.LoadScene("Scene");
+            foreach (EggScript eggScript in FindObjectsOfType<EggScript>()) {
+                eggScript.DestroyQuietly();
+            }
         }
     }
 

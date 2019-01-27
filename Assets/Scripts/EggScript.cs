@@ -27,12 +27,17 @@ public class EggScript : MonoBehaviour {
         float time = Time.time % 6;
         int color = Mathf.FloorToInt(time);
         float interval = time % 1;
-        transform.Find("top").GetComponent<SpriteRenderer>().color = Color.Lerp(colors[color], colors[(color + 1) % 6], interval);
-        transform.Find("bottom").GetComponent<SpriteRenderer>().color = Color.Lerp(colors[(color + 1) % 6], colors[(color + 2) % 6], interval);
+        top.color = Color.Lerp(colors[color], colors[(color + 1) % 6], interval);
+        bottom.color = Color.Lerp(colors[(color + 1) % 6], colors[(color + 2) % 6], interval);
     }
 
     void OnApplicationQuit() {
         isQuitting = true;
+    }
+
+    public void DestroyQuietly() {
+        isQuitting = true;
+        Destroy(gameObject);
     }
 
     void OnDestroy() {
