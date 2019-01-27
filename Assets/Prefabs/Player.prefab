@@ -111,7 +111,7 @@ GameObject:
   - component: {fileID: 5866989211922521547}
   - component: {fileID: 4145034226929406037}
   - component: {fileID: 670275594269791869}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: yorp-container
   m_TagString: Untagged
   m_Icon: {fileID: 0}

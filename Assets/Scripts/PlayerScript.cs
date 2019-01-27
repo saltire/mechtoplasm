@@ -45,7 +45,6 @@ public class PlayerScript : MonoBehaviour {
         buildingLayerMask = LayerMask.GetMask("Buildings");
 
         animator = GetComponentInChildren<Animator>();
-        Util.Log(transform.rotation.eulerAngles.y, (int)(transform.rotation.eulerAngles.y / 90));
         animator.SetInteger("facingDirection", (int)(transform.rotation.eulerAngles.y / 90));
     }
 
