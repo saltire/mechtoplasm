@@ -235,7 +235,7 @@ MonoBehaviour:
   weaponArray:
   - {fileID: 1087918642747642770, guid: 73344484b99671f48bab5b129fb54a24, type: 3}
   - {fileID: 3242715942705248665, guid: 07429d63e298f8446a2be3d0942ebbcc, type: 3}
-  - {fileID: 3242715942705248665, guid: 07429d63e298f8446a2be3d0942ebbcc, type: 3}
+  - {fileID: 4918495201023018229, guid: 9d74f02459476884b80acb142025c967, type: 3}
   - {fileID: 3242715942705248665, guid: 07429d63e298f8446a2be3d0942ebbcc, type: 3}
   canUseWeapon0: 1
   canUseWeapon1: 1
@@ -245,7 +245,6 @@ MonoBehaviour:
   deadzone: 0.5
   playerNumber: P1
   otherPlayer: {fileID: 0}
-  moveSound: {fileID: 8300000, guid: aaf5f157afb982e47938fcb263f0b456, type: 3}
 --- !u!82 &8375679810756309238
 AudioSource:
   m_ObjectHideFlags: 0
