@@ -6,7 +6,9 @@ public class TempleScript : MonoBehaviour {
     public OrbScript orb;
 
     void OnDestroy() {
-        orb.gameObject.GetComponent<MeshRenderer>().enabled = true;
-        orb.Drop();
+        if (orb != null) {
+            orb.gameObject.GetComponent<MeshRenderer>().enabled = true;
+            orb.Drop();
+        }
     }
 }

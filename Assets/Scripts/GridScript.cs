@@ -24,8 +24,9 @@ public class GridScript : MonoBehaviour {
     public Color lowColor = Color.black;
     public float minHeight = .5f;
 
-    public GameObject cubePrefab;
+    public GameObject floorPrefab;
     public Sprite[] floorSprites;
+    public Sprite[] buildingSprites;
     public GameObject[] buildingPrefabs;
     public TempleScript templePrefab;
     public OrbScript orbPrefab;
@@ -59,7 +60,7 @@ public class GridScript : MonoBehaviour {
                 int i = x * gridWidth + z;
                 float y = Mathf.PerlinNoise((float)x / gridWidth + noiseOffset, (float)z / gridHeight + noiseOffset) * heightScale;
 
-                squares[i].cube = Instantiate(cubePrefab, new Vector3(x + .5f, y - 1, z + .5f), Quaternion.identity);
+                squares[i].cube = Instantiate(floorPrefab, new Vector3(x + .5f, y - 1, z + .5f), Quaternion.identity);
                 squares[i].cube.transform.parent = transform;
                 squares[i].color = Color.Lerp(lowColor, highColor, y * (1 - minHeight) + minHeight);
                 squares[i].top = squares[i].cube.transform.position + new Vector3(0, squares[i].cube.transform.localScale.y / 2, 0);
@@ -87,7 +88,9 @@ public class GridScript : MonoBehaviour {
 
                 // place bulidings
                 if (!templePlaced && Mathf.Abs(x - z) < Mathf.Min(gridWidth, gridHeight) - 3 && Random.value < buildingChance) {
-                    Instantiate(buildingPrefabs[Random.Range(0, buildingPrefabs.Length - 1)], new Vector3(x + .5f, y, z + .5f), Quaternion.Euler(-90, Random.Range(0, 4) * 90, 0));
+                    GameObject building = Instantiate(buildingPrefabs[Random.Range(0, buildingPrefabs.Length - 1)], new Vector3(x + .5f, y, z + .5f), Quaternion.identity);
+                    SpriteRenderer buildingSprite = building.GetComponentInChildren<SpriteRenderer>();
+                    buildingSprite.sprite = buildingSprites[Random.Range(0, buildingSprites.Length - 1)];
                 }
             }
         }
