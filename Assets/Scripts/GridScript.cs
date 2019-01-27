@@ -25,7 +25,8 @@ public class GridScript : MonoBehaviour {
     public Color highColor = Color.white;
     public Color lowColor = Color.black;
     public float minHeight = .5f;
-    public Color buildingColor = Color.white;
+    // public Color buildingColor = Color.white;
+    public float buildingColorDamp = .9f;
 
     public Color[] colors;
 
@@ -73,6 +74,8 @@ public class GridScript : MonoBehaviour {
                 SpriteRenderer cubeSprite = squares[i].cube.GetComponentInChildren<SpriteRenderer>();
                 cubeSprite.sprite = floorSprites[Random.Range(0, floorSprites.Length)];
                 cubeSprite.color = squares[i].color;
+
+                Color buildingColor = Color.Lerp(lowColor, highColor, ((y - .5f) * buildingColorDamp + .5f) * (1 - minHeight) + minHeight);
 
                 // place temples and orbs
                 bool templePlaced = false;
