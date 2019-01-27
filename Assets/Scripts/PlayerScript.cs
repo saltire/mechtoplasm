@@ -252,24 +252,28 @@ public class PlayerScript : MonoBehaviour {
 
     void DropOrbs() {
         if (canUseWeapon0) {
-            OrbScript orb = Instantiate<OrbScript>(orbPrefab, transform.position + new Vector3(Random.Range(0f, 0.5f), 0.5f, Random.Range(0f, 0.5f)), Quaternion.Euler(0, 0, 0));
+            OrbScript orb = Instantiate<OrbScript>(orbPrefab, transform.position + new Vector3(Random.Range(0f, 0.5f), 0.8f, Random.Range(0f, 0.5f)), Quaternion.identity);
             orb.weaponIndex = 0;
             orb.GetComponent<MeshRenderer>().material.SetColor("_Color", grid.colors[0]);
+            orb.Drop();
         }
         if (canUseWeapon1) {
-            OrbScript orb = Instantiate<OrbScript>(orbPrefab, transform.position + new Vector3(Random.Range(0f, 0.5f), 0.5f, Random.Range(0f, 0.5f)), Quaternion.Euler(0, 0, 0));
+            OrbScript orb = Instantiate<OrbScript>(orbPrefab, transform.position + new Vector3(Random.Range(0f, 0.5f), 0.8f, Random.Range(0f, 0.5f)), Quaternion.identity);
             orb.weaponIndex = 1;
             orb.GetComponent<MeshRenderer>().material.SetColor("_Color", grid.colors[1]);
+            orb.Drop();
         }
         if (canUseWeapon2) {
-            OrbScript orb = Instantiate<OrbScript>(orbPrefab, transform.position + new Vector3(Random.Range(0f, 0.5f), 0.5f, Random.Range(0f, 0.5f)), Quaternion.Euler(0, 0, 0));
+            OrbScript orb = Instantiate<OrbScript>(orbPrefab, transform.position + new Vector3(Random.Range(0f, 0.5f), 0.8f, Random.Range(0f, 0.5f)), Quaternion.identity);
             orb.weaponIndex = 2;
             orb.GetComponent<MeshRenderer>().material.SetColor("_Color", grid.colors[2]);
+            orb.Drop();
         }
         if (canUseWeapon3) {
-            OrbScript orb = Instantiate<OrbScript>(orbPrefab, transform.position + new Vector3(Random.Range(0f, 0.5f), 0.5f, Random.Range(0f, 0.5f)), Quaternion.Euler(0, 0, 0));
+            OrbScript orb = Instantiate<OrbScript>(orbPrefab, transform.position + new Vector3(Random.Range(0f, 0.5f), 0.8f, Random.Range(0f, 0.5f)), Quaternion.identity);
             orb.weaponIndex = 3;
             orb.GetComponent<MeshRenderer>().material.SetColor("_Color", grid.colors[3]);
+            orb.Drop();
         }
     }
 
