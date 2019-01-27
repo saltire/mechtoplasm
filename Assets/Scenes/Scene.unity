@@ -1870,18 +1870,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 344212149}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &351278414 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4353397087313831250, guid: a9d8fed38feaa894ba934021d38c779e,
-    type: 3}
-  m_PrefabInstance: {fileID: 1966987559}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &351278418 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7991833807185289144, guid: a9d8fed38feaa894ba934021d38c779e,
-    type: 3}
-  m_PrefabInstance: {fileID: 1966987559}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &365222362
 GameObject:
   m_ObjectHideFlags: 0
@@ -2640,7 +2628,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 0.07
-  weaponPrefab: {fileID: 1087918642747642770, guid: 73344484b99671f48bab5b129fb54a24,
+  weaponPrefab: {fileID: 6133038031680954832, guid: 09a966330054fbf4194410ed8cb447e9,
     type: 3}
   fireCooldown: 0.5
   deadzone: 0.5
@@ -6838,37 +6826,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1392876327}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &1395391621
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1395391622}
-  m_Layer: 0
-  m_Name: Temples
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &1395391622
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1395391621}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 7.774872, y: -3.1082401, z: 7.303375}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 351278418}
-  m_Father: {fileID: 2079757198}
-  m_RootOrder: 100
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1412026236
 GameObject:
   m_ObjectHideFlags: 0
@@ -8873,80 +8830,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1957912835}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1001 &1966987559
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 1395391622}
-    m_Modifications:
-    - target: {fileID: 4353397087313831250, guid: a9d8fed38feaa894ba934021d38c779e,
-        type: 3}
-      propertyPath: m_Name
-      value: Temple
-      objectReference: {fileID: 0}
-    - target: {fileID: 4353397087313831250, guid: a9d8fed38feaa894ba934021d38c779e,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7991833807185289144, guid: a9d8fed38feaa894ba934021d38c779e,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -12.744871
-      objectReference: {fileID: 0}
-    - target: {fileID: 7991833807185289144, guid: a9d8fed38feaa894ba934021d38c779e,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 3.19824
-      objectReference: {fileID: 0}
-    - target: {fileID: 7991833807185289144, guid: a9d8fed38feaa894ba934021d38c779e,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -5.803375
-      objectReference: {fileID: 0}
-    - target: {fileID: 7991833807185289144, guid: a9d8fed38feaa894ba934021d38c779e,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7991833807185289144, guid: a9d8fed38feaa894ba934021d38c779e,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7991833807185289144, guid: a9d8fed38feaa894ba934021d38c779e,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7991833807185289144, guid: a9d8fed38feaa894ba934021d38c779e,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7991833807185289144, guid: a9d8fed38feaa894ba934021d38c779e,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7991833807185289144, guid: a9d8fed38feaa894ba934021d38c779e,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7991833807185289144, guid: a9d8fed38feaa894ba934021d38c779e,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7991833807185289144, guid: a9d8fed38feaa894ba934021d38c779e,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: a9d8fed38feaa894ba934021d38c779e, type: 3}
 --- !u!1 &1969617554
 GameObject:
   m_ObjectHideFlags: 0
@@ -9725,7 +9608,7 @@ MonoBehaviour:
   buildingPrefabs:
   - {fileID: 8671182502401197992, guid: 061b9161a7b3f8447bbc3caa6265db8c, type: 3}
   templePrefabs:
-  - {fileID: 351278414}
+  - {fileID: 4353397087313831250, guid: a9d8fed38feaa894ba934021d38c779e, type: 3}
 --- !u!4 &2079757198
 Transform:
   m_ObjectHideFlags: 0
@@ -9837,7 +9720,6 @@ Transform:
   - {fileID: 1412026237}
   - {fileID: 1788770586}
   - {fileID: 885952583}
-  - {fileID: 1395391622}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
