@@ -20,6 +20,9 @@ public class PlayerScript : MonoBehaviour {
     public int playerHealthMax;
     public int playerHealthCurrent;
 
+    public float respawnTimer = 0f;
+    public float respawnTimerMax = 10f;
+
     public string playerNumber = "";
     public PlayerScript otherPlayer;
 
@@ -74,7 +77,7 @@ public class PlayerScript : MonoBehaviour {
             if (square.surface != null) {
                 square.surface.OnStep(GetComponent<PlayerScript>());
             }
-        } else if (fireCooldownRemaining <= 0) {
+        } else if (fireCooldownRemaining <= 0 && respawnTimer <= 0) {
             GetInput();
         }
 
@@ -91,6 +94,10 @@ public class PlayerScript : MonoBehaviour {
             foreach (EggScript eggScript in FindObjectsOfType<EggScript>()) {
                 eggScript.DestroyQuietly();
             }
+        }
+
+        if (respawnTimer > 0) {
+            respawnTimer -= Time.deltaTime;
         }
     }
 
@@ -190,9 +197,9 @@ public class PlayerScript : MonoBehaviour {
     void PlayerDeath() {
         ResetWeapons();
         // drop orbs at player position
-        transform.position = startingPosition; // move player to starting position
+        transform.position = startingPosition;
         targetPosition = transform.position;
-        // player enters flashing state and can't move until time allows
+        respawnTimer = respawnTimerMax;
         playerHealthCurrent = playerHealthMax;
     }
 
