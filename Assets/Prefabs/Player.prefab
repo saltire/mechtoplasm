@@ -440,7 +440,7 @@ MonoBehaviour:
   playerHealthMax: 1
   playerHealthCurrent: 1
   respawnTimer: 0
-  respawnTimerMax: 10
+  respawnTimerMax: 3
   sineIndex: 0
   sineAmplitude: 1
   sineOmega: 10

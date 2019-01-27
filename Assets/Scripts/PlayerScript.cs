@@ -21,7 +21,7 @@ public class PlayerScript : MonoBehaviour {
     public int playerHealthCurrent;
 
     public float respawnTimer = 0f;
-    public float respawnTimerMax = 10f;
+    public float respawnTimerMax = 5f;
 
     public float sineIndex = 0f;
     public float sineAmplitude = 1.0f;
@@ -33,6 +33,7 @@ public class PlayerScript : MonoBehaviour {
     public UIScript ui;
 
     Vector3 startingPosition;
+    Quaternion startingRotation;
     Vector3 targetPosition;
     Vector3 moveVelocity;
 
@@ -49,6 +50,7 @@ public class PlayerScript : MonoBehaviour {
         Vector3Int coords = GetCoords();
         transform.position = grid.GetSquare(coords.x, coords.z).top;
         startingPosition = transform.position;
+        startingRotation = transform.rotation;
         targetPosition = transform.position;
 
         buildingLayerMask = LayerMask.GetMask("Buildings");
@@ -125,25 +127,21 @@ public class PlayerScript : MonoBehaviour {
 
         if (verticalInput >= deadzone && horizontalInput >= deadzone) {
             transform.rotation = Quaternion.Euler(0, 90, 0);
-            animator.transform.parent.rotation = Quaternion.identity;
             SetAnimatorRotation();
             Move();
         } 
         else if (verticalInput <= -deadzone && horizontalInput >= deadzone) {
             transform.rotation = Quaternion.Euler(0, 180, 0);
-            animator.transform.parent.rotation = Quaternion.identity;
             SetAnimatorRotation();
             Move();
         } 
         else if (verticalInput <= -deadzone && horizontalInput <= -deadzone) {
             transform.rotation = Quaternion.Euler(0, 270, 0);
-            animator.transform.parent.rotation = Quaternion.identity;
             SetAnimatorRotation();
             Move();
         } 
         else if (verticalInput >= deadzone && horizontalInput <= -deadzone) {
             transform.rotation = Quaternion.Euler(0, 0, 0);
-            animator.transform.parent.rotation = Quaternion.identity;
             SetAnimatorRotation();
             Move();
         } 
@@ -166,7 +164,8 @@ public class PlayerScript : MonoBehaviour {
     }
 
     void SetAnimatorRotation() {
-        animator.SetInteger("facingDirection", (int)(transform.rotation.eulerAngles.y / 90));
+        animator.transform.parent.rotation = Quaternion.identity;
+        animator.SetInteger("facingDirection", (int)Mathf.Round(transform.rotation.eulerAngles.y / 90));
     }
 
     // collision check with orbs
@@ -232,6 +231,8 @@ public class PlayerScript : MonoBehaviour {
         ResetWeapons();
         transform.position = startingPosition;
         targetPosition = transform.position;
+        transform.rotation = startingRotation;
+        SetAnimatorRotation();
         respawnTimer = respawnTimerMax;
         playerHealthCurrent = playerHealthMax;
     }
