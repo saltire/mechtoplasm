@@ -23,6 +23,7 @@ public class PlayerScript : MonoBehaviour {
     public string playerNumber = "";
     public PlayerScript otherPlayer;
 
+    Vector3 startingPosition;
     Vector3 targetPosition;
     Vector3 moveVelocity;
 
@@ -36,6 +37,7 @@ public class PlayerScript : MonoBehaviour {
 
         Vector3Int coords = GetCoords();
         transform.position = grid.GetSquare(coords.x, coords.z).top;
+        startingPosition = transform.position;
         targetPosition = transform.position;
 
         buildingLayerMask = LayerMask.GetMask("Buildings");
@@ -182,11 +184,12 @@ public class PlayerScript : MonoBehaviour {
     }
 
     void PlayerDeath() {
-        ResetWeapons();// lose weapons
+        ResetWeapons();
         // drop orbs at player position
-        // move player to starting position
+        transform.position = startingPosition; // move player to starting position
+        targetPosition = transform.position;
         // player enters flashing state and can't move until time allows
-        playerHealthCurrent = playerHealthMax;// reset health
+        playerHealthCurrent = playerHealthMax;
     }
 
     void ResetWeapons() {
