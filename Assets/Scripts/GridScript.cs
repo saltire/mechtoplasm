@@ -13,10 +13,14 @@ public class GridScript : MonoBehaviour {
     public int gridHeight = 10;
     public float heightScale = 2;
 
+    public Vector3[] temples;
+    public int templesCount = 4;
+
     public float buildingChance = .03f;
 
     public GameObject[] cubePrefabs;
     public GameObject[] buildingPrefabs;
+    public GameObject[] templePrefabs;
 
     Square[] squares;
 
@@ -35,11 +39,20 @@ public class GridScript : MonoBehaviour {
 
                 squares[i].top = squares[i].cube.transform.position + new Vector3(0, squares[i].cube.transform.localScale.y / 2, 0);
 
-                if (Mathf.Abs(x - z) < Mathf.Min(gridWidth, gridHeight) - 3 && Random.value < buildingChance) {
-                    Instantiate(buildingPrefabs[Random.Range(0, buildingPrefabs.Length - 1)], new Vector3(x + .5f, y, z + .5f), Quaternion.Euler(-90, Random.Range(0, 4) * 90, 0));
+                bool templePlaced = false;
+
+                for (int j = 0; j < templesCount; j++) {
+                    if (x == temples[j].x && z == temples[j].z) {
+                        Instantiate(templePrefabs[0], new Vector3(x + .5f, y, z + .5f), Quaternion.Euler(0, 0, 0));
+                        templePlaced = true;
+                    }
+                    else if (Mathf.Abs(x - z) < Mathf.Min(gridWidth, gridHeight) - 3 && Random.value < buildingChance && j == 0 && !templePlaced) {
+                        Instantiate(buildingPrefabs[Random.Range(0, buildingPrefabs.Length - 1)], new Vector3(x + .5f, y, z + .5f), Quaternion.Euler(-90, Random.Range(0, 4) * 90, 0));
+                    }
                 }
             }
         }
+
     }
 
     public bool SquareExists(float x, float z) {
