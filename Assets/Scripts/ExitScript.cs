@@ -5,13 +5,14 @@ using UnityEngine;
 
 public class ExitScript : MonoBehaviour {
     public GameObject exitPrefab;
+    public ExitSurfaceScript exitSurfacePrefab;
 
     public PlayerScript player1;
     public PlayerScript player2;
 
     public int minDistance = 5;
 
-    GameObject exit;
+    bool exitSpawned = false;
     GridScript grid;
 
     bool[] orbs = new bool[4];
@@ -23,7 +24,7 @@ public class ExitScript : MonoBehaviour {
     public void UpdateOrb(int index, bool status) {
         orbs[index] = status;
 
-        if (orbs.All(orb => orb) && exit == null) {
+        if (orbs.All(orb => orb) && !exitSpawned) {
             SpawnExit();
         }
     }
@@ -51,6 +52,7 @@ public class ExitScript : MonoBehaviour {
         }
         while (player1Distance < minDistance || player2Distance < minDistance || grid.HasBuilding(square));
 
-        exit = Instantiate(exitPrefab, square.top, Quaternion.identity);
+        grid.SetSquareSurface(x, z, exitSurfacePrefab);
+        exitSpawned = true;
     }
 }

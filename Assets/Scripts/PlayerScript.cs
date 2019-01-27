@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerScript : MonoBehaviour {
     public float moveSpeed = .07f;
@@ -26,6 +27,9 @@ public class PlayerScript : MonoBehaviour {
     public float sineAmplitude = 1.0f;
     public float sineOmega = 10.0f;
 
+    public float ascendTime = 5;
+    public float ascendHeight = 5;
+
     public string playerNumber = "";
     public PlayerScript otherPlayer;
 
@@ -45,6 +49,9 @@ public class PlayerScript : MonoBehaviour {
     ExitScript exit;
 
     Animator animator;
+
+    bool ascending = false;
+    float ascendTimeRemaining = 0;
 
     void Start() {
         grid = FindObjectOfType<GridScript>();
@@ -77,7 +84,16 @@ public class PlayerScript : MonoBehaviour {
     void Update() {
         float targetDistance = Vector3.Distance(targetPosition, transform.position);
 
-        if (targetDistance > .01f) {
+        if (ascending) {
+            ascendTimeRemaining -= Time.deltaTime;
+            if (ascendTimeRemaining > 0) {
+                transform.position += GetComponentInChildren<SpriteRenderer>().transform.up * ascendHeight * Time.deltaTime / ascendTime;
+            }
+            else {
+                SceneManager.LoadScene("Scene");
+            }
+        }
+        else if (targetDistance > .01f) {
             Square square = grid.GetSquare(transform.position);
             float currentSpeed = moveSpeed;
             if (square.surface != null) {
@@ -293,5 +309,11 @@ public class PlayerScript : MonoBehaviour {
         ui.UpdateOrb(1, false);
         ui.UpdateOrb(2, false);
         ui.UpdateOrb(3, false);
+    }
+
+    public void Ascend() {
+        ascending = true;
+        ascendTimeRemaining = ascendTime;
+        respawnTimer = 0;
     }
 }
