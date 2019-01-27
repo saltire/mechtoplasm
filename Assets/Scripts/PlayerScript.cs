@@ -72,9 +72,20 @@ public class PlayerScript : MonoBehaviour {
 
     void Update() {
         float targetDistance = Vector3.Distance(targetPosition, transform.position);
+
         if (targetDistance > .01f) {
-            transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref moveVelocity, moveSpeed);
-        } else if (targetDistance > 0) {
+            Square square = grid.GetSquare(transform.position);
+            float currentSpeed = moveSpeed;
+            if (square.surface != null) {
+                SlimeSurfaceScript slime = square.surface.GetComponent<SlimeSurfaceScript>();
+                if (slime != null) {
+                    currentSpeed /= slime.speedMultiplier;
+                }
+            }
+
+            transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref moveVelocity, currentSpeed);
+        } 
+        else if (targetDistance > 0) {
             transform.position = targetPosition;
 
             moveVelocity = Vector3.zero;
@@ -84,7 +95,8 @@ public class PlayerScript : MonoBehaviour {
             if (square.surface != null) {
                 square.surface.OnStep(GetComponent<PlayerScript>());
             }
-        } else if (fireCooldownRemaining <= 0 && respawnTimer <= 0) {
+        } 
+        else if (fireCooldownRemaining <= 0 && respawnTimer <= 0) {
             GetInput();
         }
 

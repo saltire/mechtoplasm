@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &4918495201023018229
+--- !u!1 &5151931020848978523
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,49 +8,40 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 6356956179572039377}
-  - component: {fileID: 4089050280643234690}
+  - component: {fileID: 6049933187424416072}
+  - component: {fileID: 3038327460081930150}
   m_Layer: 0
-  m_Name: ArtilleryWeapon
+  m_Name: SlimeSurface
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &6356956179572039377
+--- !u!4 &6049933187424416072
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4918495201023018229}
+  m_GameObject: {fileID: 5151931020848978523}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 4.2005215, y: -0.023823438, z: 5.602211}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4089050280643234690
+--- !u!114 &3038327460081930150
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4918495201023018229}
+  m_GameObject: {fileID: 5151931020848978523}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3c64e00a9cbba3042a9c6848e8287e7c, type: 3}
+  m_Script: {fileID: 11500000, guid: 7dfbf45e4e7254d4eab7f04287467c08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectilePrefab: {fileID: 5227945430056813143, guid: 16b26eb1cdbad614aba52750a5b50324,
-    type: 3}
-  fireTime: 0.8
-  fireOriginHeight: 0.6
-  fireArcHeight: 3
-  fireLength: 4
-  rotateXSpeed: 0.6
-  rotateYSpeed: 0.4
-  slimeSurfacePrefab: {fileID: 3038327460081930150, guid: 70d76e90300aa384ab7f95170f2d5be6,
-    type: 3}
-  damage: 1
+  duration: 4
+  color: {r: 0.4704944, g: 0.9056604, b: 0.13243146, a: 1}

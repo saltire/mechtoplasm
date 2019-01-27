@@ -13,6 +13,8 @@ public class ArtilleryWeaponScript : WeaponScript {
     public float rotateXSpeed = .3f;
     public float rotateYSpeed = .2f;
 
+    public SlimeSurfaceScript slimeSurfacePrefab;
+
     GameObject projectile;
     Vector3 origin;
     Vector3 target;
@@ -56,14 +58,22 @@ public class ArtilleryWeaponScript : WeaponScript {
             Destroy(projectileMesh.gameObject);
             Destroy(projectile, 1);
 
-            // grid.SetSquareSurface(target.x, target.z, fireSurfacePrefab);
+            Vector3Int targetCoords = player.GetCoords(target);
+            
+            // todo: 3x3 grid
+            for (int x = targetCoords.x - 1; x <= targetCoords.x + 1; x++) {
+                for (int z = targetCoords.z - 1; z <= targetCoords.z + 1; z++) {
+                    if (grid.SquareExists(x, z)) {
+                        grid.SetSquareSurface(x, z, slimeSurfacePrefab);
+                    }
+                }
+            }
 
             Collider[] buildings = Physics.OverlapSphere(target, .25f, buildingLayerMask);
             if (buildings.Length > 0) {
                 Destroy(buildings[0].gameObject);
             }
 
-            Vector3Int targetCoords = player.GetCoords(target);
             Vector3Int otherPlayerCoords = player.otherPlayer.GetCoords();
 
             if (otherPlayerCoords == targetCoords) {

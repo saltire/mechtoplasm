@@ -6,8 +6,10 @@ public class FireSurfaceScript : SurfaceScript {
     public float duration = 4f;
     float timeRemaining = 0;
 
+    public Color color = Color.red;
+
     void Start() {
-        square.cube.GetComponentInChildren<SpriteRenderer>().color = Color.red;
+        square.cube.GetComponentInChildren<SpriteRenderer>().color = color;
         ParticleSystem ps = GetComponent<ParticleSystem>();
         ParticleSystem.MainModule psMain = ps.main;
         psMain.duration = duration;
