@@ -3,5 +3,5 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class WeaponScript : MonoBehaviour {
-    public PlayerScript player;
+    public PlayerScript player { get; set; }
 }

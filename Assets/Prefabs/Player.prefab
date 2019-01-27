@@ -195,7 +195,7 @@ GameObject:
   - component: {fileID: 8439553400841904551}
   - component: {fileID: 8439553400841904548}
   m_Layer: 0
-  m_Name: Player 1
+  m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -235,3 +235,4 @@ MonoBehaviour:
   deadzone: 0.5
   playerNumber: P1
   otherPlayer: {fileID: 0}
+  moveSound: {fileID: 8300000, guid: aaf5f157afb982e47938fcb263f0b456, type: 3}

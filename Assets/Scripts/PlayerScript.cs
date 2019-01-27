@@ -15,6 +15,10 @@ public class PlayerScript : MonoBehaviour {
     public string playerNumber = "";
     public PlayerScript otherPlayer;
 
+    public AudioClip moveSound;
+
+    AudioSource audioSrc;
+
     Vector3 targetPosition;
     Vector3 moveVelocity;
 
@@ -24,6 +28,7 @@ public class PlayerScript : MonoBehaviour {
     GridScript grid;
 
     void Start() {
+        audioSrc = GetComponent<AudioSource>();
         grid = FindObjectOfType<GridScript>();
 
         Vector3Int coords = GetCoords();
@@ -110,6 +115,8 @@ public class PlayerScript : MonoBehaviour {
 
             if (buildings.Length == 0) {
                 targetPosition = square.top;
+                
+                audioSrc.PlayOneShot(moveSound);
             }
         }
     }

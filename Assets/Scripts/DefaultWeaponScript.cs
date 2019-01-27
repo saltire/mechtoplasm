@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class DefaultWeaponScript : WeaponScript {
-
     LayerMask buildingLayerMask;
 
     void Start() {
+        GetComponent<AudioSource>().Play();
+
         Vector3 target = transform.position + transform.forward;
         Vector3Int targetCoords = player.GetCoords(target);
         Vector3Int otherPlayerCoords = player.otherPlayer.GetCoords();
