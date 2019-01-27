@@ -80,6 +80,11 @@ public class GridScript : MonoBehaviour {
 
     public void SetSquareSurface(float x, float z, SurfaceScript surfacePrefab) {
         int i = (int)x * gridWidth + (int)z;
+
+        if (squares[i].surface != null) {
+            Destroy(squares[i].surface.gameObject);
+        }
+
         squares[i].surface = Instantiate<SurfaceScript>(surfacePrefab, squares[i].top, Quaternion.identity);
         squares[i].surface.cube = squares[i].cube;
     }
