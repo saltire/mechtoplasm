@@ -245,6 +245,8 @@ MonoBehaviour:
   canUseWeapon3: 0
   fireCooldown: 0.5
   deadzone: 0.5
+  playerHealthMax: 1
+  playerHealthCurrent: 1
   playerNumber: P1
   otherPlayer: {fileID: 0}
 --- !u!82 &8375679810756309238

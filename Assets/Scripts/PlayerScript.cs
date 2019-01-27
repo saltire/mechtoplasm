@@ -17,6 +17,9 @@ public class PlayerScript : MonoBehaviour {
 
     public float deadzone = 0.5f;
 
+    public int playerHealthMax;
+    public int playerHealthCurrent;
+
     public string playerNumber = "";
     public PlayerScript otherPlayer;
 
@@ -72,6 +75,10 @@ public class PlayerScript : MonoBehaviour {
             fireCooldownRemaining -= Time.deltaTime;
         }
 
+        if (playerHealthCurrent <= 0) {
+            PlayerDeath();
+        }
+
         if (Input.GetKeyDown("r")) {
             SceneManager.LoadScene("Scene");
         }
@@ -84,42 +91,34 @@ public class PlayerScript : MonoBehaviour {
         if (verticalInput >= deadzone && horizontalInput >= deadzone) {
             transform.rotation = Quaternion.Euler(0, 90, 0);
             Move();
-        }
-        else if (verticalInput <= -deadzone && horizontalInput >= deadzone) {
+        } else if (verticalInput <= -deadzone && horizontalInput >= deadzone) {
             transform.rotation = Quaternion.Euler(0, 180, 0);
             Move();
-        }
-        else if (verticalInput <= -deadzone && horizontalInput <= -deadzone) {
+        } else if (verticalInput <= -deadzone && horizontalInput <= -deadzone) {
             transform.rotation = Quaternion.Euler(0, 270, 0);
             Move();
-        }
-        else if (verticalInput >= deadzone && horizontalInput <= -deadzone) {
+        } else if (verticalInput >= deadzone && horizontalInput <= -deadzone) {
             transform.rotation = Quaternion.Euler(0, 0, 0);
             Move();
-        }
-        else if (Input.GetButtonDown(playerNumber + "Fire0")) {
+        } else if (Input.GetButtonDown(playerNumber + "Fire0")) {
             if (canUseWeapon0) {
                 Fire(0);
-            }
-            else {
+            } else {
                 Fire(-1);
             }
-        }
-        else if (Input.GetButtonDown(playerNumber + "Fire1")) {
+        } else if (Input.GetButtonDown(playerNumber + "Fire1")) {
             if (canUseWeapon1) {
                 Fire(1);
             } else {
                 Fire(-1);
             }
-        }
-        else if (Input.GetButtonDown(playerNumber + "Fire2")) {
+        } else if (Input.GetButtonDown(playerNumber + "Fire2")) {
             if (canUseWeapon2) {
                 Fire(2);
             } else {
                 Fire(-1);
             }
-        }
-        else if (Input.GetButtonDown(playerNumber + "Fire3")) {
+        } else if (Input.GetButtonDown(playerNumber + "Fire3")) {
             if (canUseWeapon3) {
                 Fire(3);
             } else {
@@ -177,5 +176,20 @@ public class PlayerScript : MonoBehaviour {
             GameObject weapon = Instantiate(weaponPrefab, transform.position, transform.rotation);
             weapon.GetComponent<WeaponScript>().player = gameObject.GetComponent<PlayerScript>();
         }
+    }
+
+    void PlayerDeath() {
+        ResetWeapons();// lose weapons
+        // drop orbs at player position
+        // move player to starting position
+        // player enters flashing state and can't move until time allows
+        playerHealthCurrent = playerHealthMax;// reset health
+    }
+
+    void ResetWeapons() {
+        canUseWeapon0 = false;
+        canUseWeapon1 = false;
+        canUseWeapon2 = false;
+        canUseWeapon3 = false;
     }
 }
