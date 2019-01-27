@@ -7,6 +7,6 @@ public class UIScript : MonoBehaviour {
     public Color[] colors;
 
     public void UpdateOrb(int index, bool status) {
-        orbs[index].color = status ? colors[index] : new Color(1, 1, 1, .25f);
+        orbs[index].color = status ? colors[index] : new Color(1, 1, 1, .35f);
     }
 }
