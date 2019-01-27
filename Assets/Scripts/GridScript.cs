@@ -27,7 +27,7 @@ public class GridScript : MonoBehaviour {
     public GameObject cubePrefab;
     public Sprite[] floorSprites;
     public GameObject[] buildingPrefabs;
-    public GameObject[] templePrefabs;
+    public TempleScript templePrefab;
     public OrbScript orbPrefab;
 
     Square[] squares;
@@ -72,13 +72,16 @@ public class GridScript : MonoBehaviour {
                 bool templePlaced = false;
                 for (int j = 0; j < templesCount; j++) {
                     if (x == temples[j].x && z == temples[j].z) {
-                        OrbScript orb = Instantiate<OrbScript>(orbPrefab, new Vector3(x + .5f, y, z + .5f), Quaternion.Euler(0, 0, 0));
+                        OrbScript orb = Instantiate<OrbScript>(orbPrefab, new Vector3(x + .5f, y + .8f, z + .5f), Quaternion.Euler(0, 0, 0));
                         orb.weaponIndex = (j + orbRandomizer) % templesCount;
                         orb.GetComponent<MeshRenderer>().material.SetColor("_Color", colors[orb.weaponIndex]);
+                        orb.GetComponent<MeshRenderer>().enabled = false;
 
-                        GameObject temple = Instantiate(templePrefabs[0], new Vector3(x + .5f, y, z + .5f), Quaternion.Euler(0, 0, 0));
+                        TempleScript temple = Instantiate<TempleScript>(templePrefab, new Vector3(x + .5f, y, z + .5f), Quaternion.Euler(0, 0, 0));
                         templePlaced = true;
-                        temple.GetComponent<MeshRenderer>().material.SetColor("_Color", colors[orb.weaponIndex]);
+                        // temple.GetComponent<MeshRenderer>().material.SetColor("_Color", colors[orb.weaponIndex]);
+                        temple.transform.Find("Mask").GetComponent<SpriteRenderer>().color = colors[orb.weaponIndex];
+                        temple.orb = orb;
                     }
                 }
 

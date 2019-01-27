@@ -2662,22 +2662,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player 2
       objectReference: {fileID: 0}
-    - target: {fileID: 8439553400841904548, guid: f9c1270877eae924d9b8f01035117bbc,
-        type: 3}
-      propertyPath: playerNumber
-      value: P2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8439553400841904548, guid: f9c1270877eae924d9b8f01035117bbc,
-        type: 3}
-      propertyPath: weaponPrefab
-      value: 
-      objectReference: {fileID: 6133038031680954832, guid: 09a966330054fbf4194410ed8cb447e9,
-        type: 3}
-    - target: {fileID: 8439553400841904548, guid: f9c1270877eae924d9b8f01035117bbc,
-        type: 3}
-      propertyPath: otherPlayer
-      value: 
-      objectReference: {fileID: 476635361}
     - target: {fileID: 8439553400841904551, guid: f9c1270877eae924d9b8f01035117bbc,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2733,6 +2717,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8439553400841904548, guid: f9c1270877eae924d9b8f01035117bbc,
+        type: 3}
+      propertyPath: playerNumber
+      value: P2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8439553400841904548, guid: f9c1270877eae924d9b8f01035117bbc,
+        type: 3}
+      propertyPath: weaponPrefab
+      value: 
+      objectReference: {fileID: 6133038031680954832, guid: 09a966330054fbf4194410ed8cb447e9,
+        type: 3}
+    - target: {fileID: 8439553400841904548, guid: f9c1270877eae924d9b8f01035117bbc,
+        type: 3}
+      propertyPath: otherPlayer
+      value: 
+      objectReference: {fileID: 476635361}
     - target: {fileID: 8439553399350609971, guid: f9c1270877eae924d9b8f01035117bbc,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -9248,6 +9248,9 @@ MonoBehaviour:
   - {x: 3, y: 0, z: 6}
   templesCount: 4
   buildingChance: 0.1
+  highColor: {r: 1, g: 1, b: 1, a: 1}
+  lowColor: {r: 0, g: 0, b: 0, a: 1}
+  minHeight: 0.5
   cubePrefab: {fileID: 7394580322817255855, guid: 9e21edc60ccc8db42a45c1079660b967,
     type: 3}
   floorSprites:
@@ -9257,8 +9260,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 3595084cb1d53194596a7ae094545b6d, type: 3}
   buildingPrefabs:
   - {fileID: 8671182502401197992, guid: 061b9161a7b3f8447bbc3caa6265db8c, type: 3}
-  templePrefabs:
-  - {fileID: 4353397087313831250, guid: a9d8fed38feaa894ba934021d38c779e, type: 3}
+  templePrefab: {fileID: 5723756870198144033, guid: a9d8fed38feaa894ba934021d38c779e,
+    type: 3}
   orbPrefab: {fileID: 9164443870916138088, guid: f7d812aa16b9fb2469894974ea30d600,
     type: 3}
 --- !u!4 &2079757198
@@ -9660,11 +9663,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player 1
       objectReference: {fileID: 0}
-    - target: {fileID: 8439553400841904548, guid: f9c1270877eae924d9b8f01035117bbc,
-        type: 3}
-      propertyPath: otherPlayer
-      value: 
-      objectReference: {fileID: 821022645}
     - target: {fileID: 8439553400841904551, guid: f9c1270877eae924d9b8f01035117bbc,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -9720,5 +9718,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8439553400841904548, guid: f9c1270877eae924d9b8f01035117bbc,
+        type: 3}
+      propertyPath: otherPlayer
+      value: 
+      objectReference: {fileID: 821022645}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f9c1270877eae924d9b8f01035117bbc, type: 3}
