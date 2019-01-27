@@ -24,6 +24,7 @@ public class GridScript : MonoBehaviour {
     public Sprite[] floorSprites;
     public GameObject[] buildingPrefabs;
     public GameObject[] templePrefabs;
+    public OrbScript orbPrefab;
 
     Square[] squares;
 
@@ -48,15 +49,18 @@ public class GridScript : MonoBehaviour {
 
                 squares[i].top = squares[i].cube.transform.position + new Vector3(0, squares[i].cube.transform.localScale.y / 2, 0);
 
+                // place temples
                 bool templePlaced = false;
-
                 for (int j = 0; j < templesCount; j++) {
                     if (x == temples[j].x && z == temples[j].z) {
+                        OrbScript orb = Instantiate<OrbScript>(orbPrefab, new Vector3(x + .5f, y, z + .5f), Quaternion.Euler(0, 0, 0));
+                        orb.weaponIndex = j;
                         Instantiate(templePrefabs[0], new Vector3(x + .5f, y, z + .5f), Quaternion.Euler(0, 0, 0));
                         templePlaced = true;
                     }
                 }
 
+                // place bulidings
                 if (!templePlaced && Mathf.Abs(x - z) < Mathf.Min(gridWidth, gridHeight) - 3 && Random.value < buildingChance) {
                     Instantiate(buildingPrefabs[Random.Range(0, buildingPrefabs.Length - 1)], new Vector3(x + .5f, y, z + .5f), Quaternion.Euler(-90, Random.Range(0, 4) * 90, 0));
                 }
