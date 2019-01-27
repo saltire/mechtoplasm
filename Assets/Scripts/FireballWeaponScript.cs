@@ -16,13 +16,16 @@ public class FireballWeaponScript : WeaponScript {
     public float fireOriginHeight = .6f;
     public float fireArcHeight = 1;
 
+    public FireSurfaceScript fireSurfacePrefab;
+
     List<Fireball> fireballs;
     float fireTimeRemaining = 0;
 
+    GridScript grid;
     LayerMask buildingLayerMask;
 
     void Start() {
-        GridScript grid = FindObjectOfType<GridScript>();
+        grid = FindObjectOfType<GridScript>();
 
         fireballs = new List<Fireball>();
         for (int i = 0; i < fireballCount; i++) {
@@ -59,6 +62,8 @@ public class FireballWeaponScript : WeaponScript {
         else {
             foreach (Fireball fireball in fireballs) {
                 Destroy(fireball.obj);
+
+                grid.SetSquareSurface(fireball.target.x, fireball.target.z, fireSurfacePrefab);
 
                 Collider[] buildings = Physics.OverlapSphere(fireball.target, .25f, buildingLayerMask);
                 if (buildings.Length > 0) {

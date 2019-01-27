@@ -54,6 +54,12 @@ public class PlayerScript : MonoBehaviour {
             transform.position = targetPosition;
 
             moveVelocity = Vector3.zero;
+
+            Vector3Int targetCoords = GetCoords();
+            Square square = grid.GetSquare(targetCoords.x, targetCoords.z);
+            if (square.surface != null) {
+                square.surface.OnStep(GetComponent<PlayerScript>());
+            }
         }
         else if (fireCooldownRemaining <= 0) {
             GetInput();

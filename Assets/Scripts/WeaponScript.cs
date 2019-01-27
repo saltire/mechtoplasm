@@ -2,6 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WeaponScript : MonoBehaviour {
+public abstract class WeaponScript : MonoBehaviour {
     public PlayerScript player;
 }

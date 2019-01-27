@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,6 +6,7 @@ using UnityEngine;
 public struct Square {
     public GameObject cube;
     public Vector3 top;
+    public SurfaceScript surface;
 }
 
 public class GridScript : MonoBehaviour {
@@ -63,6 +64,10 @@ public class GridScript : MonoBehaviour {
         return !(x < 0 || x >= gridWidth || z < 0 || z >= gridWidth);
     }
 
+    public Square GetSquare(Vector3 pos) {
+        return GetSquare(pos.x, pos.z);
+    }
+
     public Square GetSquare(float x, float z) {
         return GetSquare(Mathf.FloorToInt(x), Mathf.FloorToInt(z));
     }
@@ -70,5 +75,11 @@ public class GridScript : MonoBehaviour {
     public Square GetSquare(int x, int z) {
         int i = x * gridWidth + z;
         return squares[i];
+    }
+
+    public void SetSquareSurface(float x, float z, SurfaceScript surfacePrefab) {
+        int i = (int)x * gridWidth + (int)z;
+        squares[i].surface = Instantiate<SurfaceScript>(surfacePrefab, squares[i].top, Quaternion.identity);
+        squares[i].surface.cube = squares[i].cube;
     }
 }

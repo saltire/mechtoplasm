@@ -43,9 +43,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9b5d87902020ce49ba4b6cf6e3ae0d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
   fireballPrefab: {fileID: 5221765327652735831, guid: df0439d8651665e408231f0780f02df0,
     type: 3}
   fireballCount: 3
   fireTime: 0.5
   fireOriginHeight: 0.6
   fireArcHeight: 1
+  fireSurfacePrefab: {fileID: 2616474432350240584, guid: a160f9a331b6fce4492ebb063bb3ce77,
+    type: 3}
