@@ -2872,7 +2872,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0.019607844, g: 0.05882353, b: 0.019607844, a: 0}
   m_projectionMatrixMode: 1
   m_SensorSize: {x: 36, y: 24}
   m_LensShift: {x: 0, y: 0}
@@ -9247,19 +9247,27 @@ MonoBehaviour:
   - {x: 6, y: 0, z: 3}
   - {x: 3, y: 0, z: 6}
   templesCount: 4
-  buildingChance: 0.1
+  buildingChance: 0.15
+  eggChance: 0
   highColor: {r: 1, g: 1, b: 1, a: 1}
   lowColor: {r: 0, g: 0, b: 0, a: 1}
   minHeight: 0.5
-  cubePrefab: {fileID: 7394580322817255855, guid: 9e21edc60ccc8db42a45c1079660b967,
+  floorPrefab: {fileID: 7394580322817255855, guid: 9e21edc60ccc8db42a45c1079660b967,
     type: 3}
   floorSprites:
   - {fileID: 21300000, guid: 85203617c3ed5af4f8ea92bf5ed52bb7, type: 3}
   - {fileID: 21300000, guid: fa5bd1d6552035e4d8730bd054cbd730, type: 3}
   - {fileID: 21300000, guid: 38a9d38b2ebc05c438e5724951804269, type: 3}
   - {fileID: 21300000, guid: 3595084cb1d53194596a7ae094545b6d, type: 3}
-  buildingPrefabs:
-  - {fileID: 8671182502401197992, guid: 061b9161a7b3f8447bbc3caa6265db8c, type: 3}
+  buildingSprites:
+  - {fileID: 21300000, guid: fae54b5375d959245b2e313c5b108f47, type: 3}
+  - {fileID: 21300000, guid: 8c8a5cd3c4ab3bc45900207159ca65c0, type: 3}
+  - {fileID: 21300000, guid: 58e6fdfa464019a408923b16f69abc03, type: 3}
+  - {fileID: 21300000, guid: 49dd0f359702a5d43825dd0555521872, type: 3}
+  eggPrefab: {fileID: 6655668709186261564, guid: c035f333316358748840b35536202f02,
+    type: 3}
+  buildingPrefab: {fileID: 8671182502401197992, guid: 061b9161a7b3f8447bbc3caa6265db8c,
+    type: 3}
   templePrefab: {fileID: 5723756870198144033, guid: a9d8fed38feaa894ba934021d38c779e,
     type: 3}
   orbPrefab: {fileID: 9164443870916138088, guid: f7d812aa16b9fb2469894974ea30d600,

@@ -46,7 +46,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b761010250d7ff4baf1c24fd290e8a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fireSound: {fileID: 8300000, guid: aee8251bf3fb81648a5f7a3f304e68ee, type: 3}
 --- !u!198 &2034548595722713625
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -237,7 +236,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 1, g: 1, b: 1, a: 1}
+      maxColor: {r: 1, g: 0.83137256, b: 0, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}

@@ -19,6 +19,7 @@ public class GridScript : MonoBehaviour {
     public int templesCount = 4;
 
     public float buildingChance = .03f;
+    public float eggChance = .005f;
 
     public Color highColor = Color.white;
     public Color lowColor = Color.black;
@@ -27,7 +28,8 @@ public class GridScript : MonoBehaviour {
     public GameObject floorPrefab;
     public Sprite[] floorSprites;
     public Sprite[] buildingSprites;
-    public GameObject[] buildingPrefabs;
+    public GameObject eggPrefab;
+    public GameObject buildingPrefab;
     public TempleScript templePrefab;
     public OrbScript orbPrefab;
 
@@ -87,10 +89,15 @@ public class GridScript : MonoBehaviour {
                 }
 
                 // place bulidings
-                if (!templePlaced && Mathf.Abs(x - z) < Mathf.Min(gridWidth, gridHeight) - 3 && Random.value < buildingChance) {
-                    GameObject building = Instantiate(buildingPrefabs[Random.Range(0, buildingPrefabs.Length - 1)], new Vector3(x + .5f, y, z + .5f), Quaternion.identity);
-                    SpriteRenderer buildingSprite = building.GetComponentInChildren<SpriteRenderer>();
-                    buildingSprite.sprite = buildingSprites[Random.Range(0, buildingSprites.Length - 1)];
+                if (!templePlaced && Mathf.Abs(x - z) < Mathf.Min(gridWidth, gridHeight) - 3) {
+                    if (Random.value < buildingChance) {
+                        GameObject building = Instantiate(buildingPrefab, new Vector3(x + .5f, y, z + .5f), Quaternion.identity);
+                        SpriteRenderer buildingSprite = building.GetComponentInChildren<SpriteRenderer>();
+                        buildingSprite.sprite = buildingSprites[Random.Range(0, buildingSprites.Length - 1)];
+                    }
+                    else if (Random.value < eggChance) {
+                        Instantiate(eggPrefab, new Vector3(x + .5f, y, z + .5f), Quaternion.identity);
+                    }
                 }
             }
         }
