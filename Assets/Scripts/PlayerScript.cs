@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 
 public class PlayerScript : MonoBehaviour {
     public float moveSpeed = .07f;
@@ -14,7 +14,7 @@ public class PlayerScript : MonoBehaviour {
     public bool canUseWeapon3 = false;
     public float fireCooldown = .5f;
     float fireCooldownRemaining = 0;
-    
+
     public float deadzone = 0.5f;
 
     public string playerNumber = "";
@@ -54,8 +54,7 @@ public class PlayerScript : MonoBehaviour {
         float targetDistance = Vector3.Distance(targetPosition, transform.position);
         if (targetDistance > .01f) {
             transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref moveVelocity, moveSpeed);
-        }
-        else if (targetDistance > 0) {
+        } else if (targetDistance > 0) {
             transform.position = targetPosition;
 
             moveVelocity = Vector3.zero;
@@ -65,13 +64,16 @@ public class PlayerScript : MonoBehaviour {
             if (square.surface != null) {
                 square.surface.OnStep(GetComponent<PlayerScript>());
             }
-        }
-        else if (fireCooldownRemaining <= 0) {
+        } else if (fireCooldownRemaining <= 0) {
             GetInput();
         }
 
         if (fireCooldownRemaining > 0) {
             fireCooldownRemaining -= Time.deltaTime;
+        }
+
+        if (Input.GetKeyDown("r")) {
+            SceneManager.LoadScene("Scene");
         }
     }
 

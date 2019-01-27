@@ -39,6 +39,8 @@ public class GridScript : MonoBehaviour {
         temples[2] = new Vector3(Mathf.Floor(Random.Range(5, 9)), 0, Mathf.Floor(Random.Range(1, 4)));
         temples[3] = new Vector3(Mathf.Floor(Random.Range(5, 9)), 0, Mathf.Floor(Random.Range(5, 9)));
 
+        int orbRandomizer = Random.Range(0, templesCount);
+
         squares = new Square[gridWidth * gridHeight];
         for (int x = 0; x < gridWidth; x++) {
             for (int z = 0; z < gridHeight; z++) {
@@ -60,7 +62,7 @@ public class GridScript : MonoBehaviour {
                 for (int j = 0; j < templesCount; j++) {
                     if (x == temples[j].x && z == temples[j].z) {
                         OrbScript orb = Instantiate<OrbScript>(orbPrefab, new Vector3(x + .5f, y, z + .5f), Quaternion.Euler(0, 0, 0));
-                        orb.weaponIndex = j;
+                        orb.weaponIndex = (j + orbRandomizer) % templesCount;
                         Instantiate(templePrefabs[0], new Vector3(x + .5f, y, z + .5f), Quaternion.Euler(0, 0, 0));
                         templePlaced = true;
                     }
