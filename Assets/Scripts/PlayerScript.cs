@@ -81,6 +81,12 @@ public class PlayerScript : MonoBehaviour {
                 if (slime != null) {
                     currentSpeed /= slime.speedMultiplier;
                 }
+                else {
+                    IceSurfaceScript ice = square.surface.GetComponent<IceSurfaceScript>();
+                    if (ice != null) {
+                        currentSpeed /= ice.speedMultiplier;
+                    }
+                }
             }
 
             transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref moveVelocity, currentSpeed);
@@ -90,8 +96,7 @@ public class PlayerScript : MonoBehaviour {
 
             moveVelocity = Vector3.zero;
 
-            Vector3Int targetCoords = GetCoords();
-            Square square = grid.GetSquare(targetCoords.x, targetCoords.z);
+            Square square = grid.GetSquare(transform.position);
             if (square.surface != null) {
                 square.surface.OnStep(GetComponent<PlayerScript>());
             }
@@ -164,10 +169,6 @@ public class PlayerScript : MonoBehaviour {
         }
     }
 
-    void Move() {
-        Move(transform.position + transform.forward);
-    }
-
     void SetAnimatorRotation() {
         animator.transform.parent.rotation = Quaternion.identity;
         animator.SetInteger("facingDirection", (int)Mathf.Round(transform.rotation.eulerAngles.y / 90));
@@ -195,6 +196,10 @@ public class PlayerScript : MonoBehaviour {
             }
             Destroy(other.gameObject);
         }
+    }
+
+    public void Move() {
+        Move(transform.position + transform.forward);
     }
 
     public void Move(Vector3 target) {
@@ -238,6 +243,7 @@ public class PlayerScript : MonoBehaviour {
         targetPosition = transform.position;
         transform.rotation = startingRotation;
         SetAnimatorRotation();
+        GetComponentInChildren<SpriteRenderer>().color = Color.white;
         respawnTimer = respawnTimerMax;
         playerHealthCurrent = playerHealthMax;
     }

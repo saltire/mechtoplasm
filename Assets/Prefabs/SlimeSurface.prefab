@@ -43,5 +43,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dfbf45e4e7254d4eab7f04287467c08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  duration: 4
+  duration: 5
+  speedMultiplier: 0.3
   color: {r: 0.4704944, g: 0.9056604, b: 0.13243146, a: 1}

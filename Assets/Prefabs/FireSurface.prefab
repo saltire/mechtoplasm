@@ -45,7 +45,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5932d7a4086ad841977d8b6db57e141, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  duration: 4
+  duration: 5
+  color: {r: 1, g: 0, b: 0, a: 1}
+  burntColor: {r: 0.5019608, g: 0.5019608, b: 0.5019608, a: 1}
 --- !u!198 &7716188468978136502
 ParticleSystem:
   m_ObjectHideFlags: 0

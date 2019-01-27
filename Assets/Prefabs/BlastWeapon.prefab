@@ -47,6 +47,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9231dc34c17b9a14197151cf81401ca5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 1
+  iceSurfacePrefab: {fileID: 9031903941757592894, guid: 83cf848073fcabf498b0b64d162cf421,
+    type: 3}
 --- !u!1001 &2618500059591055616
 PrefabInstance:
   m_ObjectHideFlags: 0

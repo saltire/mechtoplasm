@@ -5,11 +5,25 @@ using UnityEngine;
 public class BlastWeaponScript : WeaponScript {
     public int damage = 1;
 
+    public IceSurfaceScript iceSurfacePrefab;
+
     void Start() {
         Blast(transform.forward);
         Blast(-transform.forward);
         Blast(transform.right);
         Blast(-transform.right);
+        
+        Vector3Int coords = player.GetCoords();
+        GridScript grid = GameObject.FindObjectOfType<GridScript>();
+
+        // 3x3 area, minus center
+        for (int x = coords.x - 1; x <= coords.x + 1; x++) {
+            for (int z = coords.z - 1; z <= coords.z + 1; z++) {
+                if ((x != coords.x || z != coords.z) && grid.SquareExists(x, z)) {
+                    grid.SetSquareSurface(x, z, iceSurfacePrefab);
+                }
+            }
+        }
 
         Destroy(gameObject, 1);
     }
