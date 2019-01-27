@@ -6487,6 +6487,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8215461212834205638, guid: 2f73e0ae54adcb64a97d94e60ea84fc8,
+        type: 3}
+      propertyPath: colors.Array.data[0].r
+      value: 0.4704944
+      objectReference: {fileID: 0}
+    - target: {fileID: 8215461212834205638, guid: 2f73e0ae54adcb64a97d94e60ea84fc8,
+        type: 3}
+      propertyPath: colors.Array.data[0].g
+      value: 0.9056604
+      objectReference: {fileID: 0}
+    - target: {fileID: 8215461212834205638, guid: 2f73e0ae54adcb64a97d94e60ea84fc8,
+        type: 3}
+      propertyPath: colors.Array.data[0].b
+      value: 0.13243146
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f73e0ae54adcb64a97d94e60ea84fc8, type: 3}
 --- !u!1 &1273197927
@@ -9541,6 +9556,11 @@ MonoBehaviour:
   highColor: {r: 1, g: 1, b: 1, a: 1}
   lowColor: {r: 0, g: 0, b: 0, a: 1}
   minHeight: 0.5
+  colors:
+  - {r: 0.4704944, g: 0.9056604, b: 0.13243146, a: 1}
+  - {r: 1, g: 0.30254963, b: 0.21226418, a: 1}
+  - {r: 0.17150229, g: 0.6788888, b: 0.8867924, a: 1}
+  - {r: 1, g: 0.880132, b: 0, a: 1}
   floorPrefab: {fileID: 7394580322817255855, guid: 9e21edc60ccc8db42a45c1079660b967,
     type: 3}
   floorSprites:
