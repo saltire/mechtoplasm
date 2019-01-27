@@ -67,7 +67,7 @@ public class GridScript : MonoBehaviour {
                 cubeSprite.sprite = floorSprites[Random.Range(0, floorSprites.Length - 1)];
                 cubeSprite.color = squares[i].color;
 
-                // place temples
+                // place temples and orbs
                 bool templePlaced = false;
                 for (int j = 0; j < templesCount; j++) {
                     if (x == temples[j].x && z == temples[j].z) {

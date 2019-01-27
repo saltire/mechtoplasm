@@ -254,6 +254,8 @@ MonoBehaviour:
   sineOmega: 10
   playerNumber: P1
   otherPlayer: {fileID: 0}
+  orbPrefab: {fileID: 9164443870916138088, guid: f7d812aa16b9fb2469894974ea30d600,
+    type: 3}
   ui: {fileID: 0}
 --- !u!82 &8375679810756309238
 AudioSource:

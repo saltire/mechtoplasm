@@ -29,6 +29,8 @@ public class PlayerScript : MonoBehaviour {
     public string playerNumber = "";
     public PlayerScript otherPlayer;
 
+    public OrbScript orbPrefab;
+
     public UIScript ui;
 
     Vector3 startingPosition;
@@ -249,8 +251,26 @@ public class PlayerScript : MonoBehaviour {
     }
 
     void DropOrbs() {
-        // check which weapons to drop
-        // instantiate orbs
+        if (canUseWeapon0) {
+            OrbScript orb = Instantiate<OrbScript>(orbPrefab, transform.position + new Vector3(Random.Range(0f, 0.5f), 0.5f, Random.Range(0f, 0.5f)), Quaternion.Euler(0, 0, 0));
+            orb.weaponIndex = 0;
+            orb.GetComponent<MeshRenderer>().material.SetColor("_Color", grid.colors[0]);
+        }
+        if (canUseWeapon1) {
+            OrbScript orb = Instantiate<OrbScript>(orbPrefab, transform.position + new Vector3(Random.Range(0f, 0.5f), 0.5f, Random.Range(0f, 0.5f)), Quaternion.Euler(0, 0, 0));
+            orb.weaponIndex = 1;
+            orb.GetComponent<MeshRenderer>().material.SetColor("_Color", grid.colors[1]);
+        }
+        if (canUseWeapon2) {
+            OrbScript orb = Instantiate<OrbScript>(orbPrefab, transform.position + new Vector3(Random.Range(0f, 0.5f), 0.5f, Random.Range(0f, 0.5f)), Quaternion.Euler(0, 0, 0));
+            orb.weaponIndex = 2;
+            orb.GetComponent<MeshRenderer>().material.SetColor("_Color", grid.colors[2]);
+        }
+        if (canUseWeapon3) {
+            OrbScript orb = Instantiate<OrbScript>(orbPrefab, transform.position + new Vector3(Random.Range(0f, 0.5f), 0.5f, Random.Range(0f, 0.5f)), Quaternion.Euler(0, 0, 0));
+            orb.weaponIndex = 3;
+            orb.GetComponent<MeshRenderer>().material.SetColor("_Color", grid.colors[3]);
+        }
     }
 
     void ResetWeapons() {
