@@ -9653,8 +9653,8 @@ MonoBehaviour:
   templesCount: 4
   buildingChance: 0.15
   eggChance: 0
-  highColor: {r: 1, g: 0.4575472, b: 0.78916436, a: 1}
-  lowColor: {r: 0.15775302, g: 0, b: 0.6320754, a: 1}
+  highColor: {r: 1, g: 0.95, b: 0.96153843, a: 1}
+  lowColor: {r: 0, g: 0.25209734, b: 0.385, a: 1}
   minHeight: 0.5
   colors:
   - {r: 0.4704944, g: 0.9056604, b: 0.13243146, a: 1}
