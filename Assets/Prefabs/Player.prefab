@@ -429,7 +429,7 @@ MonoBehaviour:
   weaponArray:
   - {fileID: 4918495201023018229, guid: 9d74f02459476884b80acb142025c967, type: 3}
   - {fileID: 1087918642747642770, guid: 73344484b99671f48bab5b129fb54a24, type: 3}
-  - {fileID: 6133038031680954832, guid: 09a966330054fbf4194410ed8cb447e9, type: 3}
+  - {fileID: 624324778024859901, guid: 37da16b3910cdcf4cbdff071f7a2f565, type: 3}
   - {fileID: 3242715942705248665, guid: 07429d63e298f8446a2be3d0942ebbcc, type: 3}
   canUseWeapon0: 0
   canUseWeapon1: 0
