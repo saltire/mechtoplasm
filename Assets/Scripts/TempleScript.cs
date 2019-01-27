@@ -6,7 +6,12 @@ public class TempleScript : MonoBehaviour {
     public GameObject rubblePrefab;
     public OrbScript orb;
 
+    GridScript grid;
     bool isQuitting = false;
+
+    void Start() {
+        grid = FindObjectOfType<GridScript>();
+    }
 
     void OnApplicationQuit() {
         isQuitting = true;
@@ -18,7 +23,7 @@ public class TempleScript : MonoBehaviour {
             orb.Drop();
         }
 
-        if (!isQuitting) {
+        if (!isQuitting && !grid.resetting) {
             GameObject rubble = Instantiate(rubblePrefab, transform.position, Quaternion.identity);
             rubble.GetComponentInChildren<SpriteRenderer>().color = transform.Find("Base").GetComponent<SpriteRenderer>().color;
         }

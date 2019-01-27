@@ -41,6 +41,8 @@ public class GridScript : MonoBehaviour {
     
     LayerMask buildingLayerMask;
 
+    public bool resetting = false;
+
     void Awake() {
         foreach (Transform t in transform) {
             Destroy(t.gameObject);
@@ -69,7 +71,7 @@ public class GridScript : MonoBehaviour {
                 squares[i].top = squares[i].cube.transform.position + new Vector3(0, squares[i].cube.transform.localScale.y / 2, 0);
 
                 SpriteRenderer cubeSprite = squares[i].cube.GetComponentInChildren<SpriteRenderer>();
-                cubeSprite.sprite = floorSprites[Random.Range(0, floorSprites.Length - 1)];
+                cubeSprite.sprite = floorSprites[Random.Range(0, floorSprites.Length)];
                 cubeSprite.color = squares[i].color;
 
                 // place temples and orbs
@@ -94,7 +96,7 @@ public class GridScript : MonoBehaviour {
                     if (Random.value < buildingChance) {
                         GameObject building = Instantiate(buildingPrefab, new Vector3(x + .5f, y, z + .5f), Quaternion.identity);
                         SpriteRenderer buildingSprite = building.GetComponentInChildren<SpriteRenderer>();
-                        buildingSprite.sprite = buildingSprites[Random.Range(0, buildingSprites.Length - 1)];
+                        buildingSprite.sprite = buildingSprites[Random.Range(0, buildingSprites.Length)];
                         buildingSprite.color = buildingColor;
                     }
                     else if (Random.value < eggChance) {
@@ -107,6 +109,7 @@ public class GridScript : MonoBehaviour {
 
     void Update() {
         if (Input.GetKeyDown("r")) {
+            resetting = true;
             SceneManager.LoadScene("Scene");
 
             foreach (EggScript eggScript in FindObjectsOfType<EggScript>()) {

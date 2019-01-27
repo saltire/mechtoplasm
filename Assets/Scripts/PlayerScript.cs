@@ -90,6 +90,7 @@ public class PlayerScript : MonoBehaviour {
                 transform.position += GetComponentInChildren<SpriteRenderer>().transform.up * ascendHeight * Time.deltaTime / ascendTime;
             }
             else {
+                grid.resetting = true;
                 SceneManager.LoadScene("Scene");
             }
         }
