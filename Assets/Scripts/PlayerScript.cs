@@ -23,6 +23,10 @@ public class PlayerScript : MonoBehaviour {
     public float respawnTimer = 0f;
     public float respawnTimerMax = 10f;
 
+    public float sineIndex = 0f;
+    public float sineAmplitude = 1.0f;
+    public float sineOmega = 10.0f;
+
     public string playerNumber = "";
     public PlayerScript otherPlayer;
 
@@ -95,9 +99,21 @@ public class PlayerScript : MonoBehaviour {
                 eggScript.DestroyQuietly();
             }
         }
-
+        // handle respawn timer and flicker
         if (respawnTimer > 0) {
             respawnTimer -= Time.deltaTime;
+
+            sineIndex += Time.deltaTime;
+            float sineFlicker = Mathf.Abs(sineAmplitude * Mathf.Sin(sineOmega * sineIndex));
+
+            Color tmp = GetComponentInChildren<SpriteRenderer>().color;
+            tmp.a = sineFlicker;
+            GetComponentInChildren<SpriteRenderer>().color = tmp;
+        }
+        else {
+            Color tmp = GetComponentInChildren<SpriteRenderer>().color;
+            tmp.a = 1f;
+            GetComponentInChildren<SpriteRenderer>().color = tmp;
         }
     }
 

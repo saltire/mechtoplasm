@@ -441,6 +441,9 @@ MonoBehaviour:
   playerHealthCurrent: 1
   respawnTimer: 0
   respawnTimerMax: 10
+  sineIndex: 0
+  sineAmplitude: 1
+  sineOmega: 10
   playerNumber: P1
   otherPlayer: {fileID: 0}
 --- !u!82 &8375679810756309238
