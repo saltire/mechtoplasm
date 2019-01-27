@@ -130,6 +130,7 @@ public class PlayerScript : MonoBehaviour {
         Move(transform.position + transform.forward);
     }
 
+    // collision check with orbs
     private void OnTriggerEnter(Collider other) {
         OrbScript orb = other.GetComponent<OrbScript>();
         if (orb != null) {

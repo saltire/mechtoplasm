@@ -33,6 +33,12 @@ public class GridScript : MonoBehaviour {
             Destroy(t.gameObject);
         }
 
+        // random temple start positions
+        temples[0] = new Vector3(Mathf.Floor(Random.Range(1, 4)), 0, Mathf.Floor(Random.Range(1, 4)));
+        temples[1] = new Vector3(Mathf.Floor(Random.Range(1, 4)), 0, Mathf.Floor(Random.Range(5, 9)));
+        temples[2] = new Vector3(Mathf.Floor(Random.Range(5, 9)), 0, Mathf.Floor(Random.Range(1, 4)));
+        temples[3] = new Vector3(Mathf.Floor(Random.Range(5, 9)), 0, Mathf.Floor(Random.Range(5, 9)));
+
         squares = new Square[gridWidth * gridHeight];
         for (int x = 0; x < gridWidth; x++) {
             for (int z = 0; z < gridHeight; z++) {
