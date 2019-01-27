@@ -7,6 +7,7 @@ public struct Square {
     public GameObject cube;
     public Vector3 top;
     public SurfaceScript surface;
+    public Color color;
 }
 
 public class GridScript : MonoBehaviour {
@@ -19,7 +20,8 @@ public class GridScript : MonoBehaviour {
 
     public float buildingChance = .03f;
 
-    public GameObject[] cubePrefabs;
+    public GameObject cubePrefab;
+    public Sprite[] floorSprites;
     public GameObject[] buildingPrefabs;
     public GameObject[] templePrefabs;
 
@@ -35,8 +37,14 @@ public class GridScript : MonoBehaviour {
             for (int z = 0; z < gridHeight; z++) {
                 int i = x * gridWidth + z;
                 float y = Mathf.PerlinNoise((float)x / gridWidth, (float)z / gridHeight) * heightScale;
-                squares[i].cube = Instantiate(cubePrefabs[Random.Range(0, cubePrefabs.Length - 1)], new Vector3(x + .5f, y - 1, z + .5f), Quaternion.Euler(-90, Random.Range(0, 4) * 90, 0));
+
+                squares[i].cube = Instantiate(cubePrefab, new Vector3(x + .5f, y - 1, z + .5f), Quaternion.identity);
                 squares[i].cube.transform.parent = transform;
+                squares[i].color = Color.Lerp(Color.black, Color.white, y + .35f);
+
+                SpriteRenderer cubeSprite = squares[i].cube.GetComponentInChildren<SpriteRenderer>();
+                cubeSprite.sprite = floorSprites[Random.Range(0, floorSprites.Length - 1)];
+                cubeSprite.color = squares[i].color;
 
                 squares[i].top = squares[i].cube.transform.position + new Vector3(0, squares[i].cube.transform.localScale.y / 2, 0);
 
@@ -54,7 +62,6 @@ public class GridScript : MonoBehaviour {
                 }
             }
         }
-
     }
 
     public bool SquareExists(float x, float z) {
@@ -86,6 +93,6 @@ public class GridScript : MonoBehaviour {
         }
 
         squares[i].surface = Instantiate<SurfaceScript>(surfacePrefab, squares[i].top, Quaternion.identity);
-        squares[i].surface.cube = squares[i].cube;
+        squares[i].surface.square = squares[i];
     }
 }
