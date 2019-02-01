@@ -39,7 +39,7 @@ public class GridScript : MonoBehaviour {
     public OrbScript orbPrefab;
 
     Square[] squares;
-    
+
     LayerMask buildingLayerMask;
 
     public bool resetting = false;
@@ -113,11 +113,7 @@ public class GridScript : MonoBehaviour {
     void Update() {
         if (Input.GetKeyDown("r")) {
             resetting = true;
-            SceneManager.LoadScene("Scene");
-
-            foreach (EggScript eggScript in FindObjectsOfType<EggScript>()) {
-                eggScript.DestroyQuietly();
-            }
+            SceneManager.LoadScene("Game");
         }
 
         if (Input.GetKeyDown("l")) {
@@ -126,6 +122,11 @@ public class GridScript : MonoBehaviour {
                 Instantiate(eggPrefab, building.transform.position, Quaternion.identity);
                 Destroy(building);
             }
+        }
+
+        if (Input.GetButtonDown("Quit")) {
+            resetting = true;
+            SceneManager.LoadScene("Title Screen");
         }
     }
 

@@ -91,7 +91,7 @@ public class PlayerScript : MonoBehaviour {
             }
             else {
                 grid.resetting = true;
-                SceneManager.LoadScene("Scene");
+                SceneManager.LoadScene("Game");
             }
         }
         else if (targetDistance > .01f) {
@@ -111,7 +111,7 @@ public class PlayerScript : MonoBehaviour {
             }
 
             transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref moveVelocity, currentSpeed);
-        } 
+        }
         else if (targetDistance > 0) {
             transform.position = targetPosition;
 
@@ -121,7 +121,7 @@ public class PlayerScript : MonoBehaviour {
             if (square.surface != null) {
                 square.surface.OnStep(GetComponent<PlayerScript>());
             }
-        } 
+        }
         else if (fireCooldownRemaining <= 0 && respawnTimer <= 0) {
             GetInput();
         }
@@ -160,31 +160,31 @@ public class PlayerScript : MonoBehaviour {
             transform.rotation = Quaternion.Euler(0, 90, 0);
             SetAnimatorRotation();
             Move();
-        } 
+        }
         else if (verticalInput <= -deadzone && horizontalInput >= deadzone) {
             transform.rotation = Quaternion.Euler(0, 180, 0);
             SetAnimatorRotation();
             Move();
-        } 
+        }
         else if (verticalInput <= -deadzone && horizontalInput <= -deadzone) {
             transform.rotation = Quaternion.Euler(0, 270, 0);
             SetAnimatorRotation();
             Move();
-        } 
+        }
         else if (verticalInput >= deadzone && horizontalInput <= -deadzone) {
             transform.rotation = Quaternion.Euler(0, 0, 0);
             SetAnimatorRotation();
             Move();
-        } 
+        }
         else if (Input.GetButtonDown(playerNumber + "Fire0")) {
             Fire(canUseWeapon0 ? 0 : -1);
-        } 
+        }
         else if (Input.GetButtonDown(playerNumber + "Fire1")) {
             Fire(canUseWeapon1 ? 1 : -1);
-        } 
+        }
         else if (Input.GetButtonDown(playerNumber + "Fire2")) {
             Fire(canUseWeapon2 ? 2 : -1);
-        } 
+        }
         else if (Input.GetButtonDown(playerNumber + "Fire3")) {
             Fire(canUseWeapon3 ? 3 : -1);
         }
