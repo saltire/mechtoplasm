@@ -244,7 +244,7 @@ MonoBehaviour:
   canUseWeapon2: 0
   canUseWeapon3: 0
   fireCooldown: 0.5
-  deadzone: 0.5
+  deadzone: 0.3
   playerHealthMax: 1
   playerHealthCurrent: 1
   respawnTimer: 0
@@ -252,6 +252,8 @@ MonoBehaviour:
   sineIndex: 0
   sineAmplitude: 1
   sineOmega: 10
+  ascendTime: 5
+  ascendHeight: 5
   playerNumber: P1
   otherPlayer: {fileID: 0}
   orbPrefab: {fileID: 9164443870916138088, guid: f7d812aa16b9fb2469894974ea30d600,
